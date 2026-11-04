@@ -26,7 +26,7 @@ API REST para registrar las plantas mágicas de un invernadero y sus riegos.
 ## Convenciones
 - Nombres del dominio en español (`planta`, `riego`, `invernadero`).
 - camelCase para variables y funciones.
-- Rutas REST bajo `/api` (p. ej. `/api/plantas`, `/api/plantas/:id/riegos`).
+- Rutas REST bajo `/api` (p. ej. `/api/plantas`, `POST /api/riegos`, `GET /api/plantas/:id/riegos`).
 
 ## Reglas
 - Nunca leer ni modificar `.env`.

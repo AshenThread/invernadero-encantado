@@ -264,18 +264,18 @@ Los criterios de aceptación todavía no cubren estas situaciones. Hay que decid
 - **Descripción:** crear el modelo de riego (en `src/models/`), asociado a una planta, y las validaciones de negocio de un riego nuevo: cantidad de agua y fecha en días de calendario según la hora local del invernadero.
 - **Definition of Done:**
   - [x] La spec de HU-1.2 existe en `docs/specs/`.
-  - [ ] Cada riego pertenece a una planta y guarda su fecha y su cantidad de agua en litros.
-  - [ ] Se aceptan cantidades con decimales y se rechaza una cantidad de 0 o negativa (regla 6.10).
+  - [x] Cada riego pertenece a una planta y guarda su fecha y su cantidad de agua en ml.
+  - [x] Se aceptan cantidades enteras en ml y se rechaza una cantidad de 0 o negativa (regla 6.10).
   - [x] Se acepta una fecha pasada desde el día de registro de la planta, y se rechaza una fecha futura o anterior a ese día (regla 6.4, D5).
   - [x] Las fechas se comparan como días de calendario y se ignora la hora (regla 6.5), así que un riego el mismo día del registro de la planta se acepta.
   - [ ] Las reglas de fechas y cantidad están en `src/dominio/` como funciones puras y tienen tests unitarios, incluidos los casos alrededor de la medianoche.
   - [x] `npm test` pasa.
 - **Dependencias:** T-01, T-02.
-- **Estado:** pendiente. La cantidad se guarda en ml enteros (spec X1), no en litros con decimales, y su validación está en el modelo, no en `src/dominio/`.
+- **Estado:** pendiente. La validación de cantidad está en el modelo, no en `src/dominio/` (deuda técnica).
 
 #### T-06 · Registrar un riego por la API
 - **Historia:** HU-1.2. **Tipo:** Endpoint/API.
-- **Descripción:** exponer bajo `/api/plantas/:id/riegos` la operación de registrar un riego de una planta, usando el modelo y las validaciones de T-05.
+- **Descripción:** exponer `POST /api/riegos` (la planta va en el cuerpo) para registrar un riego, usando el modelo y las validaciones de T-05. El historial sigue en `GET /api/plantas/:id/riegos`.
 - **Definition of Done:**
   - [x] Un riego válido, de hoy o con fecha pasada, queda registrado con su fecha y la cantidad indicada, y se devuelven sus datos.
   - [x] Un riego de una planta que no existe se rechaza con un error distinto al de validación y no registra nada (regla 6.9).
@@ -284,7 +284,7 @@ Los criterios de aceptación todavía no cubren estas situaciones. Hay que decid
   - [x] El router está en `src/routes/` y montado en `src/app.js`.
   - [x] `npm test` pasa.
 - **Dependencias:** T-05. Si el router comparte archivo con el de plantas, también T-03.
-- **Estado:** hecho. La ruta es `POST /api/riegos` (spec X7), no `/api/plantas/:id/riegos` como decía la descripción.
+- **Estado:** hecho.
 
 #### T-07 · Tests de aceptación de HU-1.2
 - **Historia:** HU-1.2. **Tipo:** Test.
@@ -346,9 +346,7 @@ Como cuidador, quiero corregir o borrar un riego mal registrado, para que un err
 - No hay `GET /api/plantas/:id`.
 - Los nombres de planta no son únicos.
 - Tests de aceptación API incompletos (T-04/T-07); parte curl de CA-1.2.9 sin verificar.
-- DoD de T-01, T-02 y T-05 desalineada (validaciones en modelo vs `dominio/`; Prettier del hook).
+- DoD de T-01, T-02 y T-05 desalineada (validaciones en modelo vs `dominio/`).
 - `app.listen` sin host `0.0.0.0` (despliegue en Render).
-- CORS no configurado en la API.
-- AGENTS.md y la descripción de T-06 aún citan `POST /api/plantas/:id/riegos` (la API real es `POST /api/riegos`).
 - Puntos abiertos del PRD: editar/borrar riego, máximo de cantidad, especie/ubicación cerradas, cambio de intervalo.
-- Criterios de HU-1.2 y tickets aún mencionan «litros» en varios sitios; el contrato vigente es ml.
+- Criterios de HU-1.2 aún mencionan «litros» en varios sitios; el contrato vigente es ml.
