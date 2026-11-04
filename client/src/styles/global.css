@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 0 0 var(--espacio-6);
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0 0 var(--espacio-4);
+}
+
+a {
+  color: var(--color-acento);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
