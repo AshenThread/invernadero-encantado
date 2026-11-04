@@ -33,3 +33,10 @@ API REST para registrar las plantas mágicas de un invernadero y sus riegos.
 - Nunca escribir credenciales en el código; usar variables de entorno.
 - Ninguna funcionalidad se implementa sin una spec en `docs/specs/`.
 - Ejecutar `npm test` antes de dar una tarea por terminada.
+
+## Frontend
+- Vive en `client/` (React + Vite) y llama a la API a través del proxy de Vite.
+- Antes de crear o modificar cualquier archivo de `client/`, lee `DESIGN.md`.
+- CSS plano sin librerías; colores, espacios y fuentes solo desde las variables de `client/src/styles/tokens.css`.
+- Textos en español con el tono de `DESIGN.md`.
+- Arranque: `cd client && npm run dev`.
