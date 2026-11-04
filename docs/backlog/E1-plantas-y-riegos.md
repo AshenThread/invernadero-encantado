@@ -13,8 +13,9 @@ Estas decisiones resuelven casos borde de HU-1.1 y HU-1.2. Ya están incorporada
 | D1 | No se puede registrar un riego de una planta que no existe. | Regla 6.9. Confirma CA-1.2.5. |
 | D2 | La cantidad de agua de un riego debe ser mayor que 0. | §4.2 y regla 6.10. Se quitó del §7 el supuesto «sin cantidad de agua». |
 | D3 | Nombre, especie, ubicación e intervalo son obligatorios al registrar una planta. | §4.1 y regla 6.8. |
-| D4 | La cantidad de agua se expresa en litros y puede tener decimales. | Regla 6.10. |
+| D4 | La cantidad de agua se expresa en mililitros (ml), enteros ≥ 1. (Actualizado 2026-11-04; antes decía litros.) | Regla 6.10. |
 | D5 | Un riego puede tener fecha pasada siempre que no sea anterior a la fecha de registro de la planta. Entra ya en este sprint. | Coincide con la regla 6.4. Por eso HU-1.3 se entrega dentro de HU-1.2. |
+| D6 | HU-1.5 (listar plantas) entra al MVP. | §4.5. |
 
 ## Historias del MVP
 
@@ -69,7 +70,7 @@ Como cuidador, quiero anotar que he regado una planta, hoy o en un día pasado, 
 
 **Reglas que aplican:**
 - D1: no se puede registrar un riego de una planta que no existe.
-- D2 + D4: la cantidad de agua de un riego se expresa en litros, admite decimales y debe ser mayor que 0.
+- D2 + D4: la cantidad de agua de un riego se expresa en ml, es un entero ≥ 1.
 - 6.4 + D5: un riego no puede tener fecha futura ni anterior a la fecha de registro de la planta. Sí puede tener una fecha pasada dentro de ese margen.
 - 6.5: se cuentan días de calendario y se ignora la hora.
 - §7 [SUPUESTO]: «hoy» se calcula con la hora local del invernadero.
@@ -131,8 +132,48 @@ Como cuidador, quiero anotar un riego que hice en un día pasado y olvidé regis
 ### HU-1.4 · Consultar el historial de riegos de una planta
 Como cuidador, quiero ver todos los riegos registrados de una planta, para comprobar cuándo se ha regado y detectar si falta alguno.
 
-- **Estado:** por refinar.
+- **Estado:** refinada (criterios mínimos según spec 01 §2.4). **Sprint:** 2026-10-28.
 - **Alcance:** §4.4.
+
+**Criterios de aceptación:**
+
+- **CA-1.4.1 · Historial con riegos**
+  DADO una planta con varios riegos registrados,
+  CUANDO el cuidador consulta el historial de esa planta,
+  ENTONCES ve todos esos riegos ordenados del más reciente al más antiguo.
+
+- **CA-1.4.2 · Planta sin riegos**
+  DADO una planta registrada sin ningún riego,
+  CUANDO el cuidador consulta su historial,
+  ENTONCES ve una lista vacía.
+
+- **CA-1.4.3 · Planta inexistente**
+  DADO un identificador que no corresponde a ninguna planta,
+  CUANDO el cuidador intenta consultar su historial,
+  ENTONCES se le indica que la planta no existe.
+
+### HU-1.5 · Listar las plantas registradas
+Como cuidador, quiero ver la lista de todas las plantas registradas, para encontrar la que busco y consultar su historial.
+
+- **Estado:** refinada (criterios mínimos según spec 01 §2.2). **Sprint:** 2026-10-28.
+- **Alcance:** §4.5.
+
+**Criterios de aceptación:**
+
+- **CA-1.5.1 · Lista con plantas**
+  DADO un invernadero con varias plantas registradas,
+  CUANDO el cuidador consulta la lista de plantas,
+  ENTONCES ve todas las plantas con sus datos, ordenadas de la más antigua a la más reciente por fecha de registro.
+
+- **CA-1.5.2 · Lista vacía**
+  DADO un invernadero sin plantas,
+  CUANDO el cuidador consulta la lista de plantas,
+  ENTONCES ve una lista vacía.
+
+- **CA-1.5.3 · Tras registrar una planta**
+  DADO un cuidador que acaba de registrar una planta,
+  CUANDO consulta la lista de plantas,
+  ENTONCES esa planta aparece en la lista.
 
 ## Casos borde sin cubrir (HU-1.1 y HU-1.2)
 
@@ -273,11 +314,6 @@ El camino crítico es T-01 → T-02 → T-05 → T-06 → T-07. Si ese camino se
 
 Estas historias aparecen de forma natural al descomponer la épica, pero el PRD las excluye o no las incluye en el MVP. Se dejan anotadas para no perderlas.
 
-### HU-1.5 · Listar las plantas registradas — fuera de alcance (pendiente de confirmar)
-Como cuidador, quiero ver la lista de todas las plantas registradas, para encontrar la que busco y consultar su historial.
-
-- **Motivo:** el §4 no incluye un listado general de plantas. La única consulta de plantas del MVP es la de las que necesitan agua (§4.3, épica E2). Sin un listado, el cuidador necesita conocer el identificador de la planta para HU-1.2, HU-1.3 y HU-1.4. Conviene confirmar si debe entrar en el MVP.
-
 ### HU-1.6 · Cambiar el intervalo de riego de una planta — fuera de alcance (punto abierto)
 Como cuidador, quiero cambiar el intervalo de riego de una planta ya registrada, para ajustarlo si me equivoqué o si la planta necesita otro ritmo.
 
@@ -301,3 +337,18 @@ Como cuidador, quiero corregir o borrar un riego mal registrado, para que un err
 | 4.1 Registrar planta | HU-1.1 |
 | 4.2 Registrar riego (incluido olvidado) | HU-1.2 (absorbe HU-1.3) |
 | 4.4 Historial de riegos | HU-1.4 |
+| 4.5 Lista de plantas | HU-1.5 |
+
+## Deuda técnica
+
+- Spec 01: X2, X3, X4, X7, X8 y X9 sin confirmar.
+- Las respuestas JSON incluyen `__v`.
+- No hay `GET /api/plantas/:id`.
+- Los nombres de planta no son únicos.
+- Tests de aceptación API incompletos (T-04/T-07); parte curl de CA-1.2.9 sin verificar.
+- DoD de T-01, T-02 y T-05 desalineada (validaciones en modelo vs `dominio/`; Prettier del hook).
+- `app.listen` sin host `0.0.0.0` (despliegue en Render).
+- CORS no configurado en la API.
+- AGENTS.md y la descripción de T-06 aún citan `POST /api/plantas/:id/riegos` (la API real es `POST /api/riegos`).
+- Puntos abiertos del PRD: editar/borrar riego, máximo de cantidad, especie/ubicación cerradas, cambio de intervalo.
+- Criterios de HU-1.2 y tickets aún mencionan «litros» en varios sitios; el contrato vigente es ml.

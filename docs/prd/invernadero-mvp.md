@@ -15,6 +15,7 @@ Los cuidadores del invernadero no tienen una forma fiable de saber qué plantas 
 2. Registrar un riego de una planta con la cantidad de agua usada, incluido un riego olvidado con fecha pasada.
 3. Consultar las plantas que necesitan agua, con sus días de retraso y ordenadas de la más a la menos urgente.
 4. Consultar el historial de riegos de una planta.
+5. Consultar la lista de plantas registradas.
 
 ## 5. No-alcance
 - Cuentas de usuario, permisos y separación por cuidador.
@@ -33,7 +34,7 @@ Los cuidadores del invernadero no tienen una forma fiable de saber qué plantas 
 7. La consulta muestra solo las plantas que necesitan agua, ordenadas de mayor a menor retraso.
 8. Nombre, especie, ubicación e intervalo son obligatorios al registrar una planta.
 9. No se puede registrar un riego de una planta que no existe.
-10. La cantidad de agua de un riego se expresa en litros, admite decimales y debe ser mayor que 0.
+10. La cantidad de agua de un riego se expresa en mililitros (ml), es un número entero mayor o igual que 1.
 
 ## 7. Supuestos
 - [SUPUESTO] Hay un único invernadero y todos los cuidadores ven todas las plantas.
@@ -44,6 +45,6 @@ Los cuidadores del invernadero no tienen una forma fiable de saber qué plantas 
 ## 8. Puntos abiertos
 - **Corrección de riegos erróneos:** no se ha decidido si un riego mal registrado se puede borrar o editar. Riesgo: como cuenta el más reciente, un error puede ocultar una planta seca hasta su siguiente ciclo.
 - **Desempate:** falta decidir el orden entre plantas con los mismos días de retraso.
-- **Cantidad de agua:** falta decidir si es obligatoria, con cuántos decimales se guarda y si tiene un máximo por riego.
+- **Cantidad de agua:** la unidad (ml enteros ≥ 1) ya está decidida; falta decidir si tiene un máximo por riego.
 - **Especie y ubicación:** falta decidir si son texto libre o se eligen de una lista cerrada.
 - **Cambio de intervalo:** falta decidir si se puede modificar el intervalo de una planta ya registrada y si el cambio afecta al cálculo de forma inmediata.
