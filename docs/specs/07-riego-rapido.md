@@ -49,3 +49,8 @@ La estructura sale del wireframe, el estilo de DESIGN.md y el comportamiento de 
 ### Archivos
 
 `client/src/pantallas/Plantas.jsx` · `client/src/pantallas/Plantas.css` · `client/src/api/riegos.js` (si hace falta reutilizarlo desde la lista) · componentes de formulario/mensaje existentes en `client/src/componentes/` si se reutilizan
+
+## Pendientes
+
+- El título «Riego rápido» usa 20 px (como el wireframe); DESIGN.md pide 24 px en títulos de sección.
+- La validación local de decimales reutiliza el mensaje de «mayor que 0»; la API puede devolver otro texto para no enteros.

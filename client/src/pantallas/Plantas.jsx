@@ -130,6 +130,9 @@ function Plantas({ onSeleccionarPlanta }) {
   }
 
   function abrirPanel(plantaId) {
+    if (guardandoRiego) {
+      return;
+    }
     setPanelPlantaId(plantaId);
     setCantidadRapida("500");
     setErrorCantidadRapida("");
@@ -438,6 +441,7 @@ function Plantas({ onSeleccionarPlanta }) {
                         <Boton
                           tipo="secundario"
                           aria-label={`Regar ${planta.nombre}`}
+                          deshabilitado={guardandoRiego}
                           onClick={() => abrirPanel(planta._id)}
                         >
                           Regar
@@ -482,6 +486,7 @@ function Plantas({ onSeleccionarPlanta }) {
                   <Boton
                     tipo="secundario"
                     aria-label={`Regar ${planta.nombre}`}
+                    deshabilitado={guardandoRiego}
                     onClick={() => abrirPanel(planta._id)}
                   >
                     Regar
