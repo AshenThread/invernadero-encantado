@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 760" font-family="system-ui, sans-serif">
+  <rect width="390" height="760" fill="#F2F2F2"/>
+  <rect width="390" height="48" fill="#D9D9D9"/>
+  <text x="16" y="30" font-size="14" fill="#212121">Error de validación · CA-1.8.5</text>
+
+  <text x="16" y="84" font-size="20" fill="#212121" font-weight="700">Lista de plantas</text>
+
+  <rect x="16" y="108" width="358" height="380" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+  <text x="28" y="136" font-size="16" fill="#212121" font-weight="700">Mandrágora</text>
+  <text x="28" y="160" font-size="14" fill="#616161">Mesa 2 · cada 3 días</text>
+  <rect x="28" y="176" width="100" height="32" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+  <text x="52" y="197" font-size="14" fill="#212121">Regar</text>
+
+  <line x1="28" y1="224" x2="362" y2="224" stroke="#D9D9D9" stroke-width="1"/>
+  <text x="28" y="252" font-size="16" fill="#212121" font-weight="700">Riego rápido</text>
+  <text x="28" y="284" font-size="14" fill="#212121">Cantidad (ml)</text>
+  <!-- Campo con borde de error (gris más oscuro = error en wireframe) -->
+  <rect x="28" y="296" width="318" height="40" fill="#FFFFFF" stroke="#212121" stroke-width="2"/>
+  <text x="40" y="322" font-size="16" fill="#212121">0</text>
+  <text x="28" y="360" font-size="14" fill="#212121">La cantidad de agua debe ser mayor que 0</text>
+
+  <rect x="28" y="388" width="150" height="44" fill="#616161"/>
+  <text x="48" y="416" font-size="16" fill="#FFFFFF">Guardar riego</text>
+  <rect x="190" y="388" width="120" height="44" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+  <text x="214" y="416" font-size="16" fill="#212121">Cancelar</text>
+</svg>

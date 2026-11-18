@@ -175,6 +175,57 @@ Como cuidador, quiero ver la lista de todas las plantas registradas, para encont
   CUANDO consulta la lista de plantas,
   ENTONCES esa planta aparece en la lista.
 
+### HU-1.8 · Registrar un riego rápido desde la lista
+Como cuidador, quiero registrar un riego desde la lista de plantas sin abrir su detalle, para anotarlo en segundos mientras recorro las mesas.
+
+- **Estado:** refinada. **Sprint:** 2026-11-18.
+- **Alcance:** atajo de HU-1.2 desde la lista (HU-1.5). Reutiliza `POST /api/riegos`.
+
+**Decisiones del cliente para esta historia:**
+- El panel sugiere 500 ml en «Cantidad (ml)».
+- La fecha del riego es hoy; no se muestra campo de fecha.
+- No se pide cuidador (para eso está el detalle).
+- Tras guardar con éxito, el panel se cierra y el mensaje de éxito queda visible en la lista.
+- Solo puede haber un panel de riego rápido abierto a la vez: al abrir otro se cierra el anterior.
+- Valida la cantidad igual que el detalle: si es 0 (u otro valor inválido), el error aparece junto al campo.
+
+**Criterios de aceptación:**
+
+- **CA-1.8.1 · Acción Regar en la lista**
+  DADO un invernadero con al menos una planta en la lista,
+  CUANDO el cuidador mira la lista de plantas,
+  ENTONCES cada fila muestra un botón «Regar» (con el nombre de la planta en el nombre accesible, p. ej. «Regar Mandrágora») sin tener que abrir el detalle.
+
+- **CA-1.8.2 · Panel abierto**
+  DADO una planta «Mandrágora» en la lista,
+  CUANDO el cuidador pulsa «Regar Mandrágora»,
+  ENTONCES se abre un panel de riego rápido bajo esa fila con el campo «Cantidad (ml)» precargado en 500, los botones «Guardar riego» y «Cancelar», sin campos de fecha ni cuidador; si había otro panel abierto, ese se cierra.
+
+- **CA-1.8.3 · Guardando**
+  DADO el panel de riego rápido abierto con una cantidad válida,
+  CUANDO el cuidador pulsa «Guardar riego»,
+  ENTONCES el botón pasa a «Guardando…», queda deshabilitado y no se puede enviar otra vez hasta que termine la petición.
+
+- **CA-1.8.4 · Éxito**
+  DADO el panel de riego rápido abierto para «Mandrágora» con 500 ml,
+  CUANDO el cuidador pulsa «Guardar riego» y la API acepta el riego,
+  ENTONCES el panel se cierra y en la lista aparece el mensaje «Riego guardado para Mandrágora.»
+
+- **CA-1.8.5 · Error de validación junto al campo**
+  DADO el panel de riego rápido abierto,
+  CUANDO el cuidador pone 0 en «Cantidad (ml)» y pulsa «Guardar riego»,
+  ENTONCES el riego no se envía (o se rechaza), el panel sigue abierto y junto al campo aparece el mensaje «La cantidad de agua debe ser mayor que 0».
+
+- **CA-1.8.6 · Error de conexión**
+  DADO el panel de riego rápido abierto con una cantidad válida,
+  CUANDO el cuidador pulsa «Guardar riego» y la API no responde o hay un fallo de red,
+  ENTONCES el panel sigue abierto, el botón deja de decir «Guardando…» y aparece un mensaje de error de conexión que indica que no se pudo guardar y que puede intentarlo de nuevo.
+
+- **CA-1.8.7 · Uso en móvil a 390 px**
+  DADO la lista de plantas vista a 390 px de ancho,
+  CUANDO el cuidador pulsa «Regar» en una tarjeta de planta y abre el panel,
+  ENTONCES el botón «Regar», el panel, el campo «Cantidad (ml)» y «Guardar riego» / «Cancelar» caben en el ancho sin desplazamiento horizontal y las zonas táctiles miden al menos 44 px.
+
 ## Casos borde sin cubrir (HU-1.1 y HU-1.2)
 
 Los criterios de aceptación todavía no cubren estas situaciones. Hay que decidir cada una antes de escribir la spec, o pasarla a §8 del PRD.
@@ -335,7 +386,7 @@ Como cuidador, quiero corregir o borrar un riego mal registrado, para que un err
 | Alcance (§4) | Historias |
 |---|---|
 | 4.1 Registrar planta | HU-1.1 |
-| 4.2 Registrar riego (incluido olvidado) | HU-1.2 (absorbe HU-1.3) |
+| 4.2 Registrar riego (incluido olvidado) | HU-1.2 (absorbe HU-1.3); HU-1.8 (atajo desde la lista) |
 | 4.4 Historial de riegos | HU-1.4 |
 | 4.5 Lista de plantas | HU-1.5 |
 

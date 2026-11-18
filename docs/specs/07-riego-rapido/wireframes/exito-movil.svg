@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 700" font-family="system-ui, sans-serif">
+  <rect width="390" height="700" fill="#F2F2F2"/>
+  <rect width="390" height="48" fill="#D9D9D9"/>
+  <text x="16" y="30" font-size="14" fill="#212121">Éxito · CA-1.8.4</text>
+
+  <text x="16" y="84" font-size="20" fill="#212121" font-weight="700">Lista de plantas</text>
+
+  <!-- Mensaje de éxito encima de la lista -->
+  <rect x="16" y="104" width="358" height="52" fill="#FFFFFF" stroke="#616161" stroke-width="1"/>
+  <text x="28" y="136" font-size="16" fill="#212121">Riego guardado para Mandrágora.</text>
+
+  <!-- Panel cerrado: solo tarjeta con Regar -->
+  <rect x="16" y="172" width="358" height="120" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+  <text x="28" y="200" font-size="16" fill="#212121" font-weight="700">Mandrágora</text>
+  <text x="28" y="228" font-size="14" fill="#616161">Mesa 2 · cada 3 días</text>
+  <rect x="28" y="244" width="100" height="32" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+  <text x="52" y="265" font-size="14" fill="#212121">Regar</text>
+
+  <rect x="16" y="308" width="358" height="120" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+  <text x="28" y="336" font-size="16" fill="#212121" font-weight="700">Aconito</text>
+  <text x="28" y="364" font-size="14" fill="#616161">Mesa 1 · cada 2 días</text>
+  <rect x="28" y="380" width="100" height="32" fill="#FFFFFF" stroke="#616161" stroke-width="2"/>
+  <text x="52" y="401" font-size="14" fill="#212121">Regar</text>
+</svg>
