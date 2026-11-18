@@ -6,6 +6,7 @@ function Boton({
   deshabilitado = false,
   onClick,
   type = "button",
+  "aria-label": ariaLabel,
 }) {
   const clase =
     tipo === "secundario" ? "boton boton--secundario" : "boton boton--primario";
@@ -16,6 +17,7 @@ function Boton({
       className={clase}
       disabled={deshabilitado}
       onClick={onClick}
+      aria-label={ariaLabel}
     >
       {children}
     </button>

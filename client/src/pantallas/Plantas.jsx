@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { crearPlanta, listarPlantas } from "../api/plantas.js";
+import { crearRiego } from "../api/riegos.js";
 import Boton from "../componentes/Boton.jsx";
 import Campo from "../componentes/Campo.jsx";
 import Mensaje from "../componentes/Mensaje.jsx";
@@ -19,9 +20,13 @@ const FORMULARIO_VACIO = {
   intervaloRiegoDias: "",
 };
 
-function mensajeCuidado(mensaje) {
+const MENSAJE_CANTIDAD = "La cantidad de agua debe ser mayor que 0";
+const MENSAJE_CONEXION_RIEGO =
+  "No pudimos guardar el riego. Comprueba la conexión e inténtalo de nuevo.";
+
+function mensajeCuidado(mensaje, respaldo) {
   if (!mensaje || typeof mensaje !== "string") {
-    return "No pudimos guardar la planta. Revisa los datos e inténtalo de nuevo.";
+    return respaldo;
   }
   const tecnico =
     /\b400\b/i.test(mensaje) ||
@@ -32,6 +37,17 @@ function mensajeCuidado(mensaje) {
     return "Hay un dato que no encaja. Revisa el formulario e inténtalo de nuevo.";
   }
   return mensaje;
+}
+
+function validarCantidadRapida(valor) {
+  if (valor === "" || valor === null || valor === undefined) {
+    return MENSAJE_CANTIDAD;
+  }
+  const numero = Number(valor);
+  if (!Number.isInteger(numero) || numero < 1) {
+    return MENSAJE_CANTIDAD;
+  }
+  return "";
 }
 
 function Plantas({ onSeleccionarPlanta }) {
@@ -45,7 +61,29 @@ function Plantas({ onSeleccionarPlanta }) {
   const [errorAlta, setErrorAlta] = useState("");
   const [erroresCampo, setErroresCampo] = useState({});
 
+  const [panelPlantaId, setPanelPlantaId] = useState(null);
+  const [cantidadRapida, setCantidadRapida] = useState("500");
+  const [guardandoRiego, setGuardandoRiego] = useState(false);
+  const [errorCantidadRapida, setErrorCantidadRapida] = useState("");
+  const [errorRiego, setErrorRiego] = useState("");
+  const [exitoRiego, setExitoRiego] = useState("");
+
   const formularioRef = useRef(null);
+  const [esMovil, setEsMovil] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches,
+  );
+
+  useEffect(() => {
+    const consulta = window.matchMedia("(max-width: 767px)");
+    function actualizar() {
+      setEsMovil(consulta.matches);
+    }
+    actualizar();
+    consulta.addEventListener("change", actualizar);
+    return () => consulta.removeEventListener("change", actualizar);
+  }, []);
 
   async function cargarLista() {
     setEstadoLista("cargando");
@@ -91,6 +129,127 @@ function Plantas({ onSeleccionarPlanta }) {
     input?.focus();
   }
 
+  function abrirPanel(plantaId) {
+    if (guardandoRiego) {
+      return;
+    }
+    setPanelPlantaId(plantaId);
+    setCantidadRapida("500");
+    setErrorCantidadRapida("");
+    setErrorRiego("");
+    setExitoRiego("");
+  }
+
+  function cerrarPanel() {
+    setPanelPlantaId(null);
+    setCantidadRapida("500");
+    setErrorCantidadRapida("");
+    setErrorRiego("");
+    setGuardandoRiego(false);
+  }
+
+  async function guardarRiegoRapido(evento, planta) {
+    evento.preventDefault();
+    setErrorCantidadRapida("");
+    setErrorRiego("");
+    setExitoRiego("");
+
+    const errorLocal = validarCantidadRapida(cantidadRapida);
+    if (errorLocal) {
+      setErrorCantidadRapida(errorLocal);
+      return;
+    }
+
+    setGuardandoRiego(true);
+    try {
+      const { status, cuerpo: respuesta } = await crearRiego({
+        planta: planta._id,
+        cantidadMl: Number(cantidadRapida),
+      });
+
+      if (status === 201) {
+        cerrarPanel();
+        setExitoRiego(`Riego guardado para ${planta.nombre}.`);
+        return;
+      }
+
+      if (status === 400 && Array.isArray(respuesta?.detalles)) {
+        const porCantidad = respuesta.detalles.find(
+          (detalle) => detalle.campo === "cantidadMl",
+        );
+        const generales = [];
+        for (const detalle of respuesta.detalles) {
+          const mensaje = mensajeCuidado(detalle.mensaje, MENSAJE_CANTIDAD);
+          if (detalle.campo === "cantidadMl") {
+            setErrorCantidadRapida(mensaje);
+          } else {
+            generales.push(mensaje);
+          }
+        }
+        if (!porCantidad && generales.length === 0) {
+          setErrorCantidadRapida(MENSAJE_CANTIDAD);
+        }
+        if (generales.length > 0) {
+          setErrorRiego(generales.join(" "));
+        }
+        return;
+      }
+
+      setErrorRiego(
+        mensajeCuidado(
+          respuesta?.error,
+          "No pudimos guardar el riego. Inténtalo de nuevo en un momento.",
+        ),
+      );
+    } catch {
+      setErrorRiego(MENSAJE_CONEXION_RIEGO);
+    } finally {
+      setGuardandoRiego(false);
+    }
+  }
+
+  function panelRiego(planta, sufijoId) {
+    if (panelPlantaId !== planta._id) {
+      return null;
+    }
+
+    return (
+      <form
+        className="plantas__riego-rapido"
+        onSubmit={(evento) => guardarRiegoRapido(evento, planta)}
+        noValidate
+      >
+        <h3 className="plantas__riego-titulo">Riego rápido</h3>
+        {errorRiego ? <Mensaje variante="error">{errorRiego}</Mensaje> : null}
+        <Campo
+          id={`riego-rapido-${sufijoId}-${planta._id}`}
+          etiqueta="Cantidad (ml)"
+          tipo="number"
+          min="1"
+          step="1"
+          valor={cantidadRapida}
+          onChange={(evento) => {
+            setCantidadRapida(evento.target.value);
+            setErrorCantidadRapida("");
+          }}
+          error={errorCantidadRapida}
+        />
+        <div className="plantas__riego-acciones">
+          <Boton type="submit" tipo="primario" deshabilitado={guardandoRiego}>
+            {guardandoRiego ? "Guardando…" : "Guardar riego"}
+          </Boton>
+          <Boton
+            tipo="secundario"
+            deshabilitado={guardandoRiego}
+            onClick={cerrarPanel}
+          >
+            Cancelar
+          </Boton>
+        </div>
+      </form>
+    );
+  }
+
   async function alEnviar(evento) {
     evento.preventDefault();
     setExito("");
@@ -109,7 +268,7 @@ function Plantas({ onSeleccionarPlanta }) {
     };
 
     try {
-      const { ok, status, cuerpo: respuesta } = await crearPlanta(cuerpo);
+      const { status, cuerpo: respuesta } = await crearPlanta(cuerpo);
 
       if (status === 201) {
         const nombreGuardado = respuesta?.nombre ?? formulario.nombre;
@@ -123,7 +282,10 @@ function Plantas({ onSeleccionarPlanta }) {
         const porCampo = {};
         const generales = [];
         for (const detalle of respuesta.detalles) {
-          const mensaje = mensajeCuidado(detalle.mensaje);
+          const mensaje = mensajeCuidado(
+            detalle.mensaje,
+            "No pudimos guardar la planta. Revisa los datos e inténtalo de nuevo.",
+          );
           if (CAMPOS_FORMULARIO.includes(detalle.campo)) {
             porCampo[detalle.campo] = mensaje;
           } else {
@@ -138,8 +300,10 @@ function Plantas({ onSeleccionarPlanta }) {
       }
 
       setErrorAlta(
-        mensajeCuidado(respuesta?.error) ||
+        mensajeCuidado(
+          respuesta?.error,
           "No pudimos guardar la planta. Inténtalo de nuevo en un momento.",
+        ),
       );
     } catch {
       setErrorAlta(
@@ -209,6 +373,8 @@ function Plantas({ onSeleccionarPlanta }) {
       <section className="plantas__seccion" aria-labelledby="titulo-lista">
         <h2 id="titulo-lista">Lista de plantas</h2>
 
+        {exitoRiego ? <Mensaje variante="exito">{exitoRiego}</Mensaje> : null}
+
         {estadoLista === "cargando" ? (
           <Mensaje variante="carga">Cargando plantas…</Mensaje>
         ) : null}
@@ -243,21 +409,22 @@ function Plantas({ onSeleccionarPlanta }) {
           </div>
         ) : null}
 
-        {estadoLista === "ok" ? (
-          <>
-            <div className="plantas__tabla-envoltorio">
-              <table className="plantas__tabla">
-                <thead>
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Especie</th>
-                    <th scope="col">Ubicación</th>
-                    <th scope="col">Riego cada</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {plantas.map((planta) => (
-                    <tr key={planta._id}>
+        {estadoLista === "ok" && !esMovil ? (
+          <div className="plantas__tabla-envoltorio">
+            <table className="plantas__tabla">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Especie</th>
+                  <th scope="col">Ubicación</th>
+                  <th scope="col">Riego cada</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                {plantas.map((planta) => (
+                  <Fragment key={planta._id}>
+                    <tr>
                       <td>
                         <button
                           type="button"
@@ -270,37 +437,65 @@ function Plantas({ onSeleccionarPlanta }) {
                       <td>{planta.especie}</td>
                       <td>{planta.ubicacion}</td>
                       <td>{planta.intervaloRiegoDias} días</td>
+                      <td>
+                        <Boton
+                          tipo="secundario"
+                          aria-label={`Regar ${planta.nombre}`}
+                          deshabilitado={guardandoRiego}
+                          onClick={() => abrirPanel(planta._id)}
+                        >
+                          Regar
+                        </Boton>
+                      </td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                    {panelPlantaId === planta._id ? (
+                      <tr className="plantas__fila-panel">
+                        <td colSpan={5}>{panelRiego(planta, "tabla")}</td>
+                      </tr>
+                    ) : null}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
 
-            <div className="plantas__tarjetas">
-              {plantas.map((planta) => (
-                <article key={planta._id} className="plantas__tarjeta">
-                  <h3 className="plantas__tarjeta-nombre">
-                    <button
-                      type="button"
-                      className="plantas__enlace"
-                      onClick={() => onSeleccionarPlanta?.(planta)}
-                    >
-                      {planta.nombre}
-                    </button>
-                  </h3>
-                  <p className="plantas__tarjeta-dato">
-                    Especie: {planta.especie}
-                  </p>
-                  <p className="plantas__tarjeta-dato">
-                    Ubicación: {planta.ubicacion}
-                  </p>
-                  <p className="plantas__tarjeta-dato">
-                    Riego cada: {planta.intervaloRiegoDias} días
-                  </p>
-                </article>
-              ))}
-            </div>
-          </>
+        {estadoLista === "ok" && esMovil ? (
+          <div className="plantas__tarjetas">
+            {plantas.map((planta) => (
+              <article key={planta._id} className="plantas__tarjeta">
+                <h3 className="plantas__tarjeta-nombre">
+                  <button
+                    type="button"
+                    className="plantas__enlace"
+                    onClick={() => onSeleccionarPlanta?.(planta)}
+                  >
+                    {planta.nombre}
+                  </button>
+                </h3>
+                <p className="plantas__tarjeta-dato">
+                  Especie: {planta.especie}
+                </p>
+                <p className="plantas__tarjeta-dato">
+                  Ubicación: {planta.ubicacion}
+                </p>
+                <p className="plantas__tarjeta-dato">
+                  Riego cada: {planta.intervaloRiegoDias} días
+                </p>
+                <div className="plantas__tarjeta-accion">
+                  <Boton
+                    tipo="secundario"
+                    aria-label={`Regar ${planta.nombre}`}
+                    deshabilitado={guardandoRiego}
+                    onClick={() => abrirPanel(planta._id)}
+                  >
+                    Regar
+                  </Boton>
+                </div>
+                {panelRiego(planta, "tarjeta")}
+              </article>
+            ))}
+          </div>
         ) : null}
       </section>
     </main>

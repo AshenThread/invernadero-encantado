@@ -93,7 +93,7 @@
 }
 
 .plantas__tarjetas {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: var(--espacio-4);
 }
@@ -122,6 +122,41 @@
   margin-bottom: 0;
 }
 
+.plantas__tarjeta-accion {
+  margin-top: var(--espacio-4);
+}
+
+.plantas__fila-panel td {
+  background: var(--color-superficie);
+  padding: var(--espacio-4);
+}
+
+.plantas__riego-rapido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  max-width: 100%;
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--color-borde);
+}
+
+.plantas__riego-titulo {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.plantas__riego-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-3);
+}
+
+.plantas__seccion .mensaje {
+  margin-bottom: var(--espacio-4);
+}
+
 .plantas__reintentar {
   background: none;
   border: none;
@@ -133,14 +168,4 @@
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
-}
-
-@media (max-width: 767px) {
-  .plantas__tabla-envoltorio {
-    display: none;
-  }
-
-  .plantas__tarjetas {
-    display: flex;
-  }
 }
