@@ -3,7 +3,7 @@
 - **Fuente:** [docs/diagnostico-diseno.md](../diagnostico-diseno.md) (hallazgos H-1 … H-10).
 - **Diseño:** [DESIGN.md](../../DESIGN.md).
 - **Spec base:** [docs/specs/02-frontend-e1.md](02-frontend-e1.md) — esta spec la refina; NO DEBE contradecirla.
-- **Estado:** borrador. Todavía no se escribe código de `client/` bajo esta spec.
+- **Estado:** en implementación.
 
 ## 0. Objetivo
 
