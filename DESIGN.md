@@ -1,157 +1,263 @@
-# DESIGN.md — Invernadero Encantado
+---
+name: Invernadero Encantado
+description: Señalética de terminal amarilla para anotar plantas y riegos en segundos
+colors:
+  shell: "#ffcc00"
+  primary: "#0b0b0b"
+  on-shell: "#0b0b0b"
+  on-primary: "#ffcc00"
+  text: "#0b0b0b"
+  text-secondary: "#3a3a3a"
+  background: "#e6e6e6"
+  surface: "#ffffff"
+  border: "#bdbdbd"
+  border-field: "#6e6e6e"
+  success-bg: "#ececec"
+  error: "#b3261e"
+  error-bg: "#fbecea"
+  warning: "#8a5300"
+  warning-bg: "#fbf1df"
+typography:
+  display:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 6vw, 2.75rem)"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "-0.01em"
+  headline:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "-0.01em"
+  title:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1.2
+  body:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.5
+  label:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 700
+    letterSpacing: "0.04em"
+  monument:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: 1
+    letterSpacing: "-0.02em"
+  brand-mark:
+    fontFamily: "Source Sans 3, Source Sans Pro, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "0.02em"
+rounded:
+  control: "4px"
+  card: "6px"
+spacing:
+  "0": "2px"
+  "1": "4px"
+  "2": "8px"
+  "3": "12px"
+  "4": "16px"
+  "5": "24px"
+  "6": "32px"
+  "7": "48px"
+components:
+  button-primary:
+    backgroundColor: "{colors.shell}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.control}"
+    padding: "8px 16px 8px 8px"
+    height: "44px"
+    typography: "{typography.body}"
+  button-primary-hover:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.control}"
+    padding: "8px 16px 8px 8px"
+    height: "44px"
+  button-secondary:
+    backgroundColor: "transparent"
+    textColor: "{colors.text}"
+    rounded: "{rounded.control}"
+    padding: "8px 16px 8px 8px"
+    height: "44px"
+  button-secondary-hover:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.control}"
+    padding: "8px 16px 8px 8px"
+    height: "44px"
+  input:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.control}"
+    padding: "12px"
+    height: "44px"
+    typography: "{typography.body}"
+  message-success:
+    backgroundColor: "{colors.success-bg}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.card}"
+    padding: "24px"
+  message-error:
+    backgroundColor: "{colors.error-bg}"
+    textColor: "{colors.error}"
+    rounded: "{rounded.card}"
+    padding: "24px"
+  shell-band:
+    backgroundColor: "{colors.shell}"
+    textColor: "{colors.on-shell}"
+    padding: "16px 24px"
+  form-panel:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.card}"
+    padding: "24px"
+---
 
-Sistema de diseño y guía de estilo del frontend (`client/`). Léelo antes de crear o modificar cualquier pantalla o componente. Si una spec contradice este archivo, manda la spec y hay que actualizar este archivo en el mismo commit.
+# Design System: Invernadero Encantado
 
-## Concepto
+## Overview
 
-Un cuaderno de campo botánico con un toque de magia: ordenado, legible y cálido.
+**Creative North Star: "Señalética de terminal"**
 
-**Palabras clave:** claro · botánico · con un toque de magia.
+La interfaz se lee como un tablero de decisión rápida en un aeropuerto: una banda amarilla a sangre dice dónde estás, el trabajo ocurre en negro sobre gris claro, y el intervalo de riego se lee como un número de puerta. El amarillo no decora: orienta. Rechaza el cuaderno botánico suave (verde/violeta) y el inventario SaaS gris.
 
-**Usuarios y contexto:** cuidadores voluntarios que registran plantas y riegos de pie, entre las mesas del invernadero, muchas veces desde el móvil. Deben encontrar y anotar algo en segundos.
+El producto es un cuaderno compartido de campo para un solo invernadero (`PRODUCT.md`): cuidadores de pie, a menudo en móvil, anotan plantas y riegos en segundos. Tipografía única Source Sans 3 (corte humanista tipo Frutiger), sentence case en contenido y marca, densidades táctiles ≥ 44 px, pictogramas en cuadrado negro, y motion de banda tipo split-flap que se apaga con `prefers-reduced-motion`.
 
-## Principios
+**Key Characteristics:**
+- Banda shell amarilla Schiphol (`#ffcc00`) con marca sentence-case y título de pantalla
+- Amarillo solo en banda shell y botones primario amarillo-negro (más selección de texto e inversión de hover del primario)
+- Intervalo de riego como cifra monumental tabular
+- Cabeceras de tabla negro + texto blanco; éxito en gris `#ececec`
+- Bordes negros de 2 px, radios cortos (4–6 px), sin sombras
+- Voz en español: tuteo, frases cortas, sin jerga técnica
 
-1. **Lo importante primero:** qué planta es y cuándo se regó.
-2. **Un solo botón primario por pantalla.**
-3. **Cada estado tiene su mensaje:** cargando, lista vacía, error y éxito.
-4. **Cada error dice qué pasó y cómo arreglarlo.**
+## Colors
 
-## Color
+Paleta de señalética: amarillo de orientación + negro de lectura + grises de andén. Contraste de texto ≥ 4.5:1.
 
-Usa solo estas variables. No escribas colores directamente en los componentes.
+### Primary
+- **Sign black** (`#0b0b0b` / `--color-primario`, `--color-texto`, `--color-sobre-shell`): texto, bordes estructurales, hover invertido de botones, cabeceras de tabla, outline de foco, fondos de pictograma.
+- **Schiphol yellow** (`#ffcc00` / `--color-shell`, `--color-acento`, `--color-sobre-primario`): banda shell, relleno del botón primario en reposo, texto/pictograma del primario en hover, selección de texto. No rellena éxito, thead ni hovers de fila.
 
-| Variable | Valor | Nombre | Uso |
-|---|---|---|---|
-| `--color-primario` | `#2F6B4F` | Verde invernadero | Botón primario, encabezado de tabla, éxito |
-| `--color-acento` | `#6A4C9C` | Violeta mágico | Enlaces y foco del teclado. Nunca en botones |
-| `--color-texto` | `#1E2B22` | Tinta de musgo | Texto principal |
-| `--color-texto-secundario` | `#4E5E53` | Hoja seca | Ayudas, fechas, etiquetas menores |
-| `--color-fondo` | `#F3F6F1` | Niebla de invernadero | Fondo de página |
-| `--color-superficie` | `#FFFFFF` | Superficie | Tarjetas y formularios |
-| `--color-borde` | `#C9D6CA` | — | Bordes decorativos |
-| `--color-borde-campo` | `#7A8A7F` | — | Borde de los campos (3.6:1) |
-| `--color-exito-fondo` | `#E3F0E7` | — | Fondo de mensajes de éxito |
-| `--color-error` | `#B3261E` | Error | Texto y borde de errores |
-| `--color-error-fondo` | `#FBECEA` | — | Fondo de mensajes de error |
-| `--color-aviso` | `#8A5300` | Ámbar | Reservado para la épica E2 |
-| `--color-aviso-fondo` | `#FBF1DF` | — | Reservado para la épica E2 |
+### Neutral
+- **Apron gray** (`#e6e6e6` / `--color-fondo`): fondo de página y hover de fila de tabla.
+- **Board white** (`#ffffff` / `--color-superficie`): formularios, filas, vacíos, historial, texto de thead, texto de pictograma sobre negro.
+- **Success wash** (`#ececec` / `--color-exito-fondo`): fondo de mensaje de éxito (gris, no amarillo).
+- **Secondary ink** (`#3a3a3a` / `--color-texto-secundario`): ayudas, carga, metadatos.
+- **Divider gray** (`#bdbdbd` / `--color-borde`): separadores de fila en tabla.
+- **Field edge** (`#6e6e6e` / `--color-borde-campo`): borde de inputs en reposo.
 
-Todos los textos cumplen contraste 4.5:1 o más sobre su fondo.
+### Status
+- **Error red** (`#b3261e` / `--color-error`) sobre **Error wash** (`#fbecea` / `--color-error-fondo`): mensajes y campos en error; el error nunca es solo color. Pictograma de error: cuadrado rojo + trazo blanco.
+- **Warning amber** (`#8a5300` / `--color-aviso`) y **Warning wash** (`#fbf1df` / `--color-aviso-fondo`): reservados en tokens para E2; la UI E1 no los usa aún.
 
-## Tipografía
+### Named Rules
+**The Yellow Is Chrome Rule.** El amarillo Schiphol vive solo en la banda shell y en el botón primario amarillo-negro (reposo + inversión de hover). No tiñe éxito, thead, hover de fila ni fondos de página.
 
-Fuentes de Google Fonts:
+**The No Botanical Palette Rule.** Prohibidos el verde invernadero y el violeta mágico del sistema anterior. Sin degradados ornamentales ni glow.
 
-- `--fuente-titulos`: **Bricolage Grotesque** 600.
-- `--fuente-texto`: **Atkinson Hyperlegible** 400 y 700.
+## Typography
 
-| Uso | Tamaño | Fuente |
-|---|---|---|
-| Título de pantalla | 32 px | títulos 600 |
-| Título de sección | 24 px | títulos 600 |
-| Destacado y botones | 18 px | texto 700 |
-| Texto general y campos | 16 px | texto 400 |
-| Ayudas y fechas (mínimo) | 14 px | texto 400 |
+**Display Font:** Source Sans 3 (fallback Source Sans Pro, system-ui)
+**Body Font:** Source Sans 3 (mismos pesos 400 / 600 / 700 vía Google Fonts en `client/index.html`)
+**Data / Monument:** Source Sans 3 con `font-variant-numeric: tabular-nums`
 
-Interlineado 1.5. Ningún texto por debajo de 14 px.
+**Character:** Un solo corte humanista de señalética: denso, legible a distancia de brazo, sin serifa display ni mono ornamental.
 
-## Espacio y forma
+### Hierarchy
+- **Brand mark** (700, 14 px, `letter-spacing: 0.02em`, sentence case): solo «Invernadero Encantado» dentro de la banda shell. Sin `text-transform: uppercase`. No reutilizar como kicker de sección.
+- **Display / band title** (700, `clamp(2rem, 6vw, 2.75rem)`, line-height 1.2): título de pantalla en la banda (Plantas, nombre de planta, estados).
+- **Headline** (700, 22 px): `h2` de sección (Lista, Historial, formularios).
+- **Title (mobile list name)** (700, 24 px): nombre de planta en tarjeta móvil; sin subrayado en reposo.
+- **Body** (400, 16 px, line-height 1.5): párrafos, campos, celdas. Mínimo de UI: 14 px.
+- **Label / table head** (700, 14 px, uppercase, `letter-spacing: 0.04em`): cabeceras de tabla (texto blanco sobre negro).
+- **Monument interval** (700, 28 px, line-height 1, tabular; unidad 14 px / 600): `intervaloRiegoDias` + «días».
 
-| Variable | Valor | Uso típico |
-|---|---|---|
-| `--espacio-1` | 4 px | Entre icono y texto |
-| `--espacio-2` | 8 px | Entre etiqueta y campo |
-| `--espacio-3` | 12 px | Relleno de botones |
-| `--espacio-4` | 16 px | Entre campos de un formulario |
-| `--espacio-5` | 24 px | Relleno de tarjetas |
-| `--espacio-6` | 32 px | Entre secciones |
-| `--espacio-7` | 48 px | Margen de página en escritorio |
+### Named Rules
+**The Gate Number Rule.** El intervalo de riego se tipografía como número de puerta (`intervalo-monumento`), nunca como chip pastel ni texto corrido del mismo peso que el cuerpo.
 
-- **Radios:** `--radio-control` 8 px (botones y campos); `--radio-tarjeta` 12 px (tarjetas y mensajes).
-- **Sin sombras:** se separa con bordes de 1 px y espacio.
+**The Sentence Case Rule.** Contenido, CTAs y marca de banda en sentence case. Uppercase solo en cabeceras de tabla.
 
-## Tokens en CSS
+## Layout
 
-Estas variables van en `client/src/styles/tokens.css` y se importan una sola vez en la entrada de la app:
+Shell a columna completa: banda amarilla edge-to-edge, luego cuerpo centrado (`max-width: 960px`). Padding de banda: 16×24 móvil, 24×48 desde 768 px. Padding de cuerpo: 24 móvil, 32×48 desde 768 px. Ritmo vertical: `--espacio-4` entre campos, `--espacio-5` dentro de paneles, `--espacio-6` entre secciones.
 
-```css
-:root {
-  --color-primario: #2f6b4f;
-  --color-acento: #6a4c9c;
-  --color-texto: #1e2b22;
-  --color-texto-secundario: #4e5e53;
-  --color-fondo: #f3f6f1;
-  --color-superficie: #ffffff;
-  --color-borde: #c9d6ca;
-  --color-borde-campo: #7a8a7f;
-  --color-exito-fondo: #e3f0e7;
-  --color-error: #b3261e;
-  --color-error-fondo: #fbecea;
-  --color-aviso: #8a5300;
-  --color-aviso-fondo: #fbf1df;
+**Plantas:** lista (o su estado) primero; formulario de alta debajo en panel bordeado. Bajo 768 px la tabla se convierte en tarjetas apiladas con `data-label`.
+**Detalle:** Volver → metadatos con intervalo monumental → historial → formulario de riego. Un solo primario por vista.
 
-  --fuente-titulos: "Bricolage Grotesque", system-ui, sans-serif;
-  --fuente-texto: "Atkinson Hyperlegible", system-ui, sans-serif;
+### Named Rules
+**The Band First Rule.** Toda pantalla empieza con banda amarilla (marca + `h1`); el trabajo vive debajo, nunca dentro del amarillo.
 
-  --espacio-1: 4px;
-  --espacio-2: 8px;
-  --espacio-3: 12px;
-  --espacio-4: 16px;
-  --espacio-5: 24px;
-  --espacio-6: 32px;
-  --espacio-7: 48px;
+## Elevation & Depth
 
-  --radio-control: 8px;
-  --radio-tarjeta: 12px;
-}
-```
+Sistema plano. No hay `box-shadow`. La profundidad viene de contraste tonal (amarillo / negro / blanco / gris) y de bordes negros de 2 px en paneles, tabla, vacíos y mensajes.
 
-## Componentes
+### Named Rules
+**The Flat Board Rule.** Sin sombras, sin blur, sin elevación material. Separación = borde + espacio.
 
-| Componente | Cómo se ve | Reglas |
-|---|---|---|
-| **Botón primario** | Fondo `--color-primario`, texto blanco 700 | Altura mínima 44 px. Uno por pantalla |
-| **Botón secundario** | Borde de 2 px `--color-primario`, fondo blanco, texto primario | Altura mínima 44 px. Para acciones de apoyo o cancelar |
-| **Campo** | Etiqueta visible arriba, borde `--color-borde-campo` | La ayuda va debajo. Con error: borde de 2 px `--color-error` y mensaje debajo con icono |
-| **Lista de plantas** | Tabla con encabezado `--color-primario`: nombre, especie, ubicación, riego cada | En el móvil, cada fila se convierte en una tarjeta con el nombre arriba |
-| **Historial de riegos** | Lista vertical, el más reciente primero | Fecha en negrita; cantidad y cuidador debajo, en `--color-texto-secundario` |
-| **Mensaje de carga** | Solo texto, por ejemplo «Cargando plantas…» | Sin animaciones ni spinners |
-| **Mensaje de éxito** | Fondo `--color-exito-fondo`, icono de visto | Nombra lo que se guardó |
-| **Mensaje de error** | Fondo `--color-error-fondo`, texto `--color-error`, icono | Dice qué pasó y qué hacer |
-| **Lista vacía** | Borde discontinuo y una acción | Siempre ofrece el siguiente paso, por ejemplo «Registrar el primer riego» |
+## Shapes
 
-## Datos y textos de la API
+Radios cortos de señalética: controles y campos a 4 px (`--radio-control`); paneles, mensajes, filas/tarjetas a 6 px (`--radio-tarjeta`). Bordes estructurales 2 px sólidos en negro (o error). Vacíos: borde 2 px dashed negro. Focus visible global: outline 3 px negro, offset 2 px (4 px en el `h1` de banda). Pictogramas de acción/feedback: cuadrados de 28–32 px sin radio (esquina viva).
 
-- **Campos de la planta:** Nombre, Especie, Ubicación y «Riego cada (días)».
-- **Cantidad del riego:** se muestra como «Cantidad (ml)», igual que la guarda la API (`cantidadMl`).
-- **Cuidador:** es opcional. Si falta, se muestra «sin cuidador».
-- **Fechas:** formato corto en español, por ejemplo «28 oct 2026».
-- **Errores de validación de la API:** se muestran junto al campo al que corresponden. Si no se pueden asociar a un campo, van arriba del formulario.
+### Named Rules
+**The Short Radius Rule.** Nada de píldoras ni radios grandes; 4–6 px es el techo.
 
-## Tono de voz
+## Components
 
-Español, tuteo, frases cortas y sin tecnicismos: nada de «400», «ObjectId» ni «payload».
+### Shell band (`.app-banda`)
+Banda full-bleed Schiphol yellow, texto negro, borde inferior 4 px negro. Contiene marca sentence-case «Invernadero Encantado» + `h1` de pantalla (`tabIndex={-1}` para foco al navegar). Animación firma `flap-in` (180 ms, `steps(2, end)`, clip-path inset): al montar/cambiar pantalla simula update split-flap. Con `prefers-reduced-motion: reduce`, sin animación (cambio instantáneo).
 
-| Así sí | Así no |
-|---|---|
-| «Escribe cada cuántos días hay que regarla. Mínimo 1.» | «Error 400: intervaloRiegoDias inválido.» |
-| «No encontramos esa planta. Puede que se haya borrado.» | «CastError: ObjectId no válido.» |
-| «Riego guardado para Helecho Lunar.» | «¡Operación realizada con éxito! 🎉» |
+### Buttons (`Boton`)
+- **Shape:** radio 4 px; min-height 44 px; padding 8×16×8×8; peso 700; 18 px; gap 12 px.
+- **Pictogram:** cuadrado negro 32×32 con flecha stroke square/miter (amarillo sobre negro en primario; blanco sobre negro en secundario). En hover del primario el cuadrado se invierte (amarillo + flecha negra); en secundario, blanco + flecha negra.
+- **Primary:** relleno amarillo, borde 2 px negro, texto negro. Hover: fondo negro + texto amarillo. Active: `translateY(1px)`.
+- **Secondary:** transparente, borde 2 px negro, texto negro. Hover: fondo negro + texto blanco (sin amarillo).
+- **Disabled:** opacity 0.45. Transición 120 ms; off bajo reduced-motion.
 
-## Accesibilidad
+### Inputs / Fields (`Campo`)
+Etiqueta 16 px / 700 encima del control. Control blanco, borde 1 px `#6e6e6e`, radio 4 px, min-height 44 px. Focus: borde 2 px negro (padding compensado). Error: borde 2 px rojo + texto de error con icono SVG stroke circular (inline, no cuadrado). Ayuda en secondary ink 14 px. Etiquetas reales (`htmlFor` / `id`); `aria-invalid` / `aria-describedby` cuando aplica.
 
-- Contraste de texto de 4.5:1 o más.
-- Un `<label>` real en cada campo.
-- Los errores llevan icono y texto, nunca solo color.
-- Zonas táctiles de 44 px como mínimo.
-- Foco visible al navegar con teclado: contorno de 3 px en `--color-acento`.
-- Botones con `<button>` y enlaces con `<a href>`, nunca un `div` con `onClick`.
+### Messages (`Mensaje`)
+- **Carga:** texto secondary, sin caja ni animación («Cargando…»). Sin spinners.
+- **Éxito:** fondo `#ececec`, borde 2 px negro, pictograma cuadrado negro 28×28 con check stroke blanco square/miter, `role="status"`.
+- **Error:** fondo error-wash, borde/texto rojo, pictograma cuadrado rojo 28×28 con cruz stroke blanca, `role="alert"`; slot opcional de acción (Reintentar).
+- Entrada 160 ms con easing steps; off bajo reduced-motion.
 
-## No hacemos
+### List / table (Plantas)
+Tabla blanca con borde 2 px negro. Thead negro + texto blanco uppercase. Hover de fila: apron gray (`#e6e6e6`), sin amarillo. Enlaces de nombre: 700, underline 2 px. Intervalo en celda con monumento. Móvil: thead oculto; cada fila es tarjeta bordeada; nombre a 24 px sin underline en reposo.
 
-- Librerías de UI o de CSS (Tailwind, Bootstrap, MUI…).
-- Animaciones, sombras ni degradados.
-- Modo oscuro.
-- Imágenes, ilustraciones ni emojis.
-- Iconos de librerías: solo SVG en línea, los mínimos.
+### Detail cards (Detalle)
+Ítems de historial en grid (fecha tabular 18/700 + detalle 14 secondary). Formularios y vacíos: panel blanco, borde 2 px (dashed en vacío). CTAs de vacío/reintento: texto 700 subrayado, zona ≥ 44 px, sin botón relleno.
+
+### Interval monument
+Patrón global `.intervalo-monumento` + unidad «días». Usado en lista y detalle. Es el dato de wayfinding del dominio.
+
+## Do's and Don'ts
+
+### Do:
+- **Do** poner marca sentence-case «Invernadero Encantado» + título de pantalla en la banda amarilla de cada vista.
+- **Do** tipografiar el intervalo con `.intervalo-monumento` (28 px tabular + unidad).
+- **Do** usar pictogramas en cuadrado negro (flecha en `Boton`; visto/error en `Mensaje`).
+- **Do** usar solo tokens de `client/src/styles/tokens.css` para color, tipo, espacio y radio.
+- **Do** respetar `prefers-reduced-motion` en banda, botones, campos, mensajes y hovers.
+- **Do** escribir UI en español con tuteo y frases cortas; errores con texto accionable.
+- **Do** mantener zonas táctiles ≥ 44 px y foco `:focus-visible` negro de 3 px.
+
+### Don't:
+- **Don't** reintroducir verde botánico, violeta mágico, Bricolage Grotesque ni Atkinson Hyperlegible.
+- **Don't** usar el amarillo fuera de banda shell y botón primario amarillo-negro (ni en thead, hover de fila ni éxito).
+- **Don't** poner uppercase en la marca de banda; la marca va en sentence case.
+- **Don't** añadir sombras, glows, píldoras full-radius, emojis ni librerías de UI/CSS.
+- **Don't** poner kickers uppercase de contenido fuera de las cabeceras de tabla.
+- **Don't** mostrar códigos HTTP, ObjectId ni jerga de API al cuidador.
+- **Don't** usar `scroll-behavior: smooth` incondicional ni spinners como único estado de carga.

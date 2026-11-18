@@ -1,0 +1,40 @@
+{
+  "mode": "operate",
+  "buildPath": "code",
+  "direction": "seed:6416c5ed9ef8951d",
+  "world": "wayfinding-cartography-signage-terminal-yellow-wayfinding",
+  "phases": {
+    "comps": {
+      "status": "skipped",
+      "reason": "Operate surface is code-led; no comp round owed"
+    },
+    "spec": {
+      "status": "skipped",
+      "reason": "code-led"
+    },
+    "plates": {
+      "status": "skipped",
+      "reason": "code-led"
+    },
+    "hero": {
+      "status": "recorded",
+      "artifact": ".impeccable/review/hero-repro.png"
+    },
+    "sections": {
+      "status": "done"
+    },
+    "motion": {
+      "status": "done",
+      "signature": "split-flap band flap-in"
+    },
+    "responsive": {
+      "status": "done",
+      "artifacts": [
+        ".impeccable/review/desktop.png",
+        ".impeccable/review/mobile.png"
+      ]
+    }
+  },
+  "disposition": "ship",
+  "updatedAt": "2026-11-09T16:27:06.421861+00:00"
+}

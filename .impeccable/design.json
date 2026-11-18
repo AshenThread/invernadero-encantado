@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T16:17:00.000Z",
+  "title": "Design System: Invernadero Encantado",
+  "extensions": {
+    "colorMeta": {
+      "shell": {
+        "role": "primary",
+        "displayName": "Schiphol yellow",
+        "canonical": "#ffcc00",
+        "tonalRamp": [
+          "#3d3100",
+          "#6b5600",
+          "#9a7c00",
+          "#c9a300",
+          "#ffcc00",
+          "#ffd633",
+          "#ffe066",
+          "#fff5cc"
+        ]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Sign black",
+        "canonical": "#0b0b0b",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "on-shell": {
+        "role": "neutral",
+        "displayName": "Ink on yellow",
+        "canonical": "#0b0b0b",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "on-primary": {
+        "role": "primary",
+        "displayName": "Yellow on black",
+        "canonical": "#ffcc00",
+        "tonalRamp": [
+          "#3d3100",
+          "#6b5600",
+          "#9a7c00",
+          "#c9a300",
+          "#ffcc00",
+          "#ffd633",
+          "#ffe066",
+          "#fff5cc"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Primary ink",
+        "canonical": "#0b0b0b",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary ink",
+        "canonical": "#3a3a3a",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Apron gray",
+        "canonical": "#e6e6e6",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Board white",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Divider gray",
+        "canonical": "#bdbdbd",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "border-field": {
+        "role": "neutral",
+        "displayName": "Field edge",
+        "canonical": "#6e6e6e",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#e6e6e6",
+          "#ffffff"
+        ]
+      },
+      "success-bg": {
+        "role": "neutral",
+        "displayName": "Success wash",
+        "canonical": "#ececec",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#1a1a1a",
+          "#3a3a3a",
+          "#6e6e6e",
+          "#9e9e9e",
+          "#bdbdbd",
+          "#ececec",
+          "#ffffff"
+        ]
+      },
+      "error": {
+        "role": "primary",
+        "displayName": "Error red",
+        "canonical": "#b3261e",
+        "tonalRamp": [
+          "#4a100c",
+          "#7a1a14",
+          "#b3261e",
+          "#d6453d",
+          "#e87a74",
+          "#f2a8a4",
+          "#fbecea",
+          "#fef6f5"
+        ]
+      },
+      "error-bg": {
+        "role": "neutral",
+        "displayName": "Error wash",
+        "canonical": "#fbecea",
+        "tonalRamp": [
+          "#4a100c",
+          "#7a1a14",
+          "#b3261e",
+          "#d6453d",
+          "#e87a74",
+          "#f2a8a4",
+          "#fbecea",
+          "#fef6f5"
+        ]
+      },
+      "warning": {
+        "role": "primary",
+        "displayName": "Warning amber",
+        "canonical": "#8a5300",
+        "tonalRamp": [
+          "#3d2500",
+          "#5c3700",
+          "#8a5300",
+          "#b87a1a",
+          "#d4a04a",
+          "#e8c78a",
+          "#fbf1df",
+          "#fdf8ef"
+        ]
+      },
+      "warning-bg": {
+        "role": "neutral",
+        "displayName": "Warning wash",
+        "canonical": "#fbf1df",
+        "tonalRamp": [
+          "#3d2500",
+          "#5c3700",
+          "#8a5300",
+          "#b87a1a",
+          "#d4a04a",
+          "#e8c78a",
+          "#fbf1df",
+          "#fdf8ef"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Band title",
+        "purpose": "Título de pantalla en la banda shell (Plantas, nombre, estados)."
+      },
+      "headline": {
+        "displayName": "Section headline",
+        "purpose": "h2 de lista, historial y formularios."
+      },
+      "title": {
+        "displayName": "Mobile plant name",
+        "purpose": "Nombre de planta en tarjeta móvil de la lista."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Párrafos, campos, celdas; base 16 px."
+      },
+      "label": {
+        "displayName": "Table label",
+        "purpose": "Cabeceras de tabla uppercase; texto blanco sobre negro."
+      },
+      "monument": {
+        "displayName": "Interval monument",
+        "purpose": "Cifra de intervaloRiegoDias como número de puerta."
+      },
+      "brand-mark": {
+        "displayName": "Brand mark",
+        "purpose": "Solo «Invernadero Encantado» en sentence case en la banda shell."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "flap-in",
+        "value": "180ms steps(2, end)",
+        "purpose": "Firma split-flap de la banda shell al montar/cambiar pantalla; clip-path inset."
+      },
+      {
+        "name": "mensaje-entrar",
+        "value": "160ms steps(2, end)",
+        "purpose": "Entrada de mensajes éxito/error (translateY + opacity)."
+      },
+      {
+        "name": "control-state",
+        "value": "120ms ease-out",
+        "purpose": "Hover/focus de botones, campos y filas de tabla."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce → animation/transition none (o 0.01ms global)",
+        "purpose": "Cambio instantáneo de banda y sin micro-motion en controles."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA primario amarillo-negro con pictograma flecha en cuadrado negro.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\"><span class=\"ds-btn-primary__pic\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h9M8 3.5 12.5 8 8 12.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\"/></svg></span><span class=\"ds-btn-primary__txt\">Registrar planta</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 8px 16px 8px 8px; border: 2px solid var(--color-texto, #0b0b0b); border-radius: var(--radio-control, 4px); background: var(--color-acento, #ffcc00); color: var(--color-texto, #0b0b0b); font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: 0.01em; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out, transform 120ms ease-out; } .ds-btn-primary__pic { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex-shrink: 0; background: var(--color-texto, #0b0b0b); color: var(--color-acento, #ffcc00); } .ds-btn-primary__txt { padding-right: 8px; } .ds-btn-primary:hover { background: var(--color-texto, #0b0b0b); color: var(--color-acento, #ffcc00); } .ds-btn-primary:hover .ds-btn-primary__pic { background: var(--color-acento, #ffcc00); color: var(--color-texto, #0b0b0b); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-texto, #0b0b0b); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } .ds-btn-primary:active { transform: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Acción secundaria con pictograma flecha; hover negro/blanco sin amarillo.",
+      "html": "<button type=\"button\" class=\"ds-btn-secondary\"><span class=\"ds-btn-secondary__pic\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h9M8 3.5 12.5 8 8 12.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\"/></svg></span><span class=\"ds-btn-secondary__txt\">Volver a plantas</span></button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 8px 16px 8px 8px; border: 2px solid var(--color-texto, #0b0b0b); border-radius: var(--radio-control, 4px); background: transparent; color: var(--color-texto, #0b0b0b); font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 18px; font-weight: 700; line-height: 1.3; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out; } .ds-btn-secondary__pic { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex-shrink: 0; background: var(--color-texto, #0b0b0b); color: var(--color-superficie, #ffffff); } .ds-btn-secondary__txt { padding-right: 8px; } .ds-btn-secondary:hover { background: var(--color-texto, #0b0b0b); color: var(--color-superficie, #ffffff); } .ds-btn-secondary:hover .ds-btn-secondary__pic { background: var(--color-superficie, #ffffff); color: var(--color-texto, #0b0b0b); } .ds-btn-secondary:focus-visible { outline: 3px solid var(--color-texto, #0b0b0b); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-secondary { transition: none; } }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo con etiqueta real, borde de andén y foco negro de 2 px.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field__label\" for=\"ds-nombre\">Nombre</label><input id=\"ds-nombre\" class=\"ds-field__control\" type=\"text\" value=\"\" /><p class=\"ds-field__help\">Como la llamáis en el invernadero.</p></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; } .ds-field__label { font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 16px; font-weight: 700; color: var(--color-texto, #0b0b0b); } .ds-field__control { min-height: 44px; padding: 12px; border: 1px solid var(--color-borde-campo, #6e6e6e); border-radius: var(--radio-control, 4px); background: var(--color-superficie, #ffffff); color: var(--color-texto, #0b0b0b); font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 16px; line-height: 1.5; transition: border-color 120ms ease-out; } .ds-field__control:focus { border: 2px solid var(--color-texto, #0b0b0b); padding: 11px; outline: none; } .ds-field__control:focus-visible { outline: 3px solid var(--color-texto, #0b0b0b); outline-offset: 2px; } .ds-field__help { margin: 0; font-size: 14px; color: var(--color-texto-secundario, #3a3a3a); } @media (prefers-reduced-motion: reduce) { .ds-field__control { transition: none; } }"
+    },
+    {
+      "name": "Success Message",
+      "kind": "custom",
+      "refersTo": "message-success",
+      "description": "Feedback de éxito: lavado gris #ececec, pictograma cuadrado negro, role=status.",
+      "html": "<div class=\"ds-msg ds-msg--exito\" role=\"status\"><div class=\"ds-msg__row\"><span class=\"ds-msg__pic\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8.5 6.5 12 13 4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\"/></svg></span><div>Planta registrada.</div></div></div>",
+      "css": ".ds-msg { border-radius: var(--radio-tarjeta, 6px); padding: 24px; font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 16px; line-height: 1.5; border: 2px solid transparent; } .ds-msg--exito { background: var(--color-exito-fondo, #ececec); color: var(--color-texto, #0b0b0b); border-color: var(--color-texto, #0b0b0b); } .ds-msg__row { display: flex; align-items: flex-start; gap: 8px; } .ds-msg__pic { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; background: var(--color-texto, #0b0b0b); color: var(--color-superficie, #ffffff); }"
+    },
+    {
+      "name": "Error Message",
+      "kind": "custom",
+      "refersTo": "message-error",
+      "description": "Error con pictograma cuadrado rojo + cruz blanca; acción Reintentar opcional.",
+      "html": "<div class=\"ds-msg ds-msg--error\" role=\"alert\"><div class=\"ds-msg__row\"><span class=\"ds-msg__pic ds-msg__pic--error\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M4 4l8 8M12 4l-8 8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\"/></svg></span><div>No pudimos cargar las plantas. Comprueba la conexión e inténtalo de nuevo.</div></div><div class=\"ds-msg__action\"><button type=\"button\" class=\"ds-link-action\">Reintentar</button></div></div>",
+      "css": ".ds-msg { border-radius: var(--radio-tarjeta, 6px); padding: 24px; font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 16px; line-height: 1.5; border: 2px solid transparent; } .ds-msg--error { background: var(--color-error-fondo, #fbecea); color: var(--color-error, #b3261e); border-color: var(--color-error, #b3261e); } .ds-msg__row { display: flex; align-items: flex-start; gap: 8px; } .ds-msg__pic { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; background: var(--color-texto, #0b0b0b); color: var(--color-superficie, #ffffff); } .ds-msg__pic--error { background: var(--color-error, #b3261e); color: var(--color-superficie, #ffffff); } .ds-msg__action { margin-top: 16px; } .ds-link-action { background: none; border: none; padding: 0; min-height: 44px; color: inherit; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; cursor: pointer; } .ds-link-action:focus-visible { outline: 3px solid var(--color-texto, #0b0b0b); outline-offset: 2px; }"
+    },
+    {
+      "name": "Shell Band",
+      "kind": "nav",
+      "refersTo": "shell-band",
+      "description": "Banda wayfinding full-bleed: marca sentence-case + título; firma flap-in.",
+      "html": "<header class=\"ds-banda\"><p class=\"ds-banda__marca\">Invernadero Encantado</p><h1 class=\"ds-banda__titulo\">Plantas</h1></header>",
+      "css": ".ds-banda { background: var(--color-shell, #ffcc00); color: var(--color-sobre-shell, #0b0b0b); padding: 16px 24px; border-bottom: 4px solid var(--color-texto, #0b0b0b); animation: ds-flap-in 180ms steps(2, end) both; } .ds-banda__marca { margin: 0 0 8px; font-family: var(--fuente-titulos, \"Source Sans 3\", sans-serif); font-size: 14px; font-weight: 700; line-height: 1.3; letter-spacing: 0.02em; color: var(--color-sobre-shell, #0b0b0b); } .ds-banda__titulo { margin: 0; font-family: var(--fuente-titulos, \"Source Sans 3\", sans-serif); font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: var(--color-sobre-shell, #0b0b0b); max-width: 20ch; } .ds-banda__titulo:focus-visible { outline: 3px solid var(--color-texto, #0b0b0b); outline-offset: 4px; } @keyframes ds-flap-in { from { clip-path: inset(0 0 100% 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } } @media (min-width: 768px) { .ds-banda { padding: 24px 48px; } } @media (prefers-reduced-motion: reduce) { .ds-banda { animation: none; } }"
+    },
+    {
+      "name": "Form Panel",
+      "kind": "card",
+      "refersTo": "form-panel",
+      "description": "Contenedor de alta: blanco, borde negro 2 px, radio 6 px.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel__title\">Registrar planta</h2><p class=\"ds-panel__body\">Nombre, especie, ubicación e intervalo.</p></section>",
+      "css": ".ds-panel { background: var(--color-superficie, #ffffff); border: 2px solid var(--color-texto, #0b0b0b); border-radius: var(--radio-tarjeta, 6px); padding: 24px; font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); color: var(--color-texto, #0b0b0b); } .ds-panel__title { margin: 0 0 16px; font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; } .ds-panel__body { margin: 0; font-size: 16px; line-height: 1.5; color: var(--color-texto-secundario, #3a3a3a); }"
+    },
+    {
+      "name": "Interval Monument",
+      "kind": "custom",
+      "refersTo": "monument",
+      "description": "Cifra de riego cada N días; tipografía monumental tabular.",
+      "html": "<p class=\"ds-intervalo-wrap\">Riego cada <span class=\"ds-intervalo\">7<span class=\"ds-intervalo__unidad\">días</span></span></p>",
+      "css": ".ds-intervalo-wrap { margin: 0; font-family: var(--fuente-texto, \"Source Sans 3\", sans-serif); font-size: 16px; color: var(--color-texto-secundario, #3a3a3a); } .ds-intervalo { font-family: var(--fuente-datos, \"Source Sans 3\", sans-serif); font-size: 28px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--color-texto, #0b0b0b); } .ds-intervalo__unidad { display: inline-block; margin-left: 4px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; vertical-align: 0.35em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Señalética de terminal",
+    "overview": "La interfaz se lee como un tablero de decisión rápida en un aeropuerto: una banda amarilla a sangre dice dónde estás, el trabajo ocurre en negro sobre gris claro, y el intervalo de riego se lee como un número de puerta. El amarillo no decora: orienta. Rechaza el cuaderno botánico suave (verde/violeta) y el inventario SaaS gris.\n\nEl producto es un cuaderno compartido de campo para un solo invernadero (PRODUCT.md): cuidadores de pie, a menudo en móvil, anotan plantas y riegos en segundos. Tipografía única Source Sans 3 (corte humanista tipo Frutiger), sentence case en contenido y marca, densidades táctiles ≥ 44 px, pictogramas en cuadrado negro, y motion de banda tipo split-flap que se apaga con prefers-reduced-motion.",
+    "keyCharacteristics": [
+      "Banda shell amarilla Schiphol (#ffcc00) con marca sentence-case y título de pantalla",
+      "Amarillo solo en banda shell y botones primario amarillo-negro (más selección de texto e inversión de hover del primario)",
+      "Intervalo de riego como cifra monumental tabular",
+      "Cabeceras de tabla negro + texto blanco; éxito en gris #ececec",
+      "Bordes negros de 2 px, radios cortos (4–6 px), sin sombras",
+      "Voz en español: tuteo, frases cortas, sin jerga técnica"
+    ],
+    "rules": [
+      {
+        "name": "The Yellow Is Chrome Rule",
+        "body": "El amarillo Schiphol vive solo en la banda shell y en el botón primario amarillo-negro (reposo + inversión de hover). No tiñe éxito, thead, hover de fila ni fondos de página.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Botanical Palette Rule",
+        "body": "Prohibidos el verde invernadero y el violeta mágico del sistema anterior. Sin degradados ornamentales ni glow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gate Number Rule",
+        "body": "El intervalo de riego se tipografía como número de puerta (intervalo-monumento), nunca como chip pastel ni texto corrido del mismo peso que el cuerpo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Contenido, CTAs y marca de banda en sentence case. Uppercase solo en cabeceras de tabla.",
+        "section": "typography"
+      },
+      {
+        "name": "The Band First Rule",
+        "body": "Toda pantalla empieza con banda amarilla (marca + h1); el trabajo vive debajo, nunca dentro del amarillo.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Board Rule",
+        "body": "Sin sombras, sin blur, sin elevación material. Separación = borde + espacio.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Short Radius Rule",
+        "body": "Nada de píldoras ni radios grandes; 4–6 px es el techo.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do poner marca sentence-case «Invernadero Encantado» + título de pantalla en la banda amarilla de cada vista.",
+      "Do tipografiar el intervalo con .intervalo-monumento (28 px tabular + unidad).",
+      "Do usar pictogramas en cuadrado negro (flecha en Boton; visto/error en Mensaje).",
+      "Do usar solo tokens de client/src/styles/tokens.css para color, tipo, espacio y radio.",
+      "Do respetar prefers-reduced-motion en banda, botones, campos, mensajes y hovers.",
+      "Do escribir UI en español con tuteo y frases cortas; errores con texto accionable.",
+      "Do mantener zonas táctiles ≥ 44 px y foco :focus-visible negro de 3 px."
+    ],
+    "donts": [
+      "Don't reintroducir verde botánico, violeta mágico, Bricolage Grotesque ni Atkinson Hyperlegible.",
+      "Don't usar el amarillo fuera de banda shell y botón primario amarillo-negro (ni en thead, hover de fila ni éxito).",
+      "Don't poner uppercase en la marca de banda; la marca va en sentence case.",
+      "Don't añadir sombras, glows, píldoras full-radius, emojis ni librerías de UI/CSS.",
+      "Don't poner kickers uppercase de contenido fuera de las cabeceras de tabla.",
+      "Don't mostrar códigos HTTP, ObjectId ni jerga de API al cuidador.",
+      "Don't usar scroll-behavior: smooth incondicional ni spinners como único estado de carga."
+    ]
+  }
+}
