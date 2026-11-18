@@ -1,27 +1,15 @@
-.detalle {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: var(--espacio-5);
-}
-
-@media (min-width: 768px) {
-  .detalle {
-    padding: var(--espacio-7);
-  }
-}
-
 .detalle__volver {
   margin-bottom: var(--espacio-4);
 }
 
 .detalle__apoyo {
-  margin: calc(-1 * var(--espacio-4)) 0 var(--espacio-6);
+  margin: 0 0 var(--espacio-6);
   color: var(--color-texto-secundario);
   font-size: 16px;
 }
 
 .detalle__apoyo p {
-  margin: 0 0 var(--espacio-1);
+  margin: 0 0 var(--espacio-2);
 }
 
 .detalle__apoyo p:last-child {
@@ -34,7 +22,7 @@
 
 .detalle__formulario {
   background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
+  border: 2px solid var(--color-texto);
   border-radius: var(--radio-tarjeta);
   padding: var(--espacio-5);
 }
@@ -44,7 +32,7 @@
 }
 
 .detalle__vacio {
-  border: 2px dashed var(--color-borde);
+  border: 2px dashed var(--color-texto);
   border-radius: var(--radio-tarjeta);
   padding: var(--espacio-5);
   background: var(--color-superficie);
@@ -62,11 +50,13 @@
   border: none;
   padding: 0;
   min-height: 44px;
-  color: var(--color-acento);
+  color: var(--color-texto);
   font-family: var(--fuente-texto);
   font-size: 16px;
   font-weight: 700;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 
@@ -76,28 +66,39 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-4);
+  gap: var(--espacio-3);
 }
 
 .detalle__riego {
   background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
+  border: 2px solid var(--color-texto);
   border-radius: var(--radio-tarjeta);
-  padding: var(--espacio-5);
+  padding: var(--espacio-4) var(--espacio-5);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espacio-2) var(--espacio-4);
+  align-items: baseline;
 }
 
 .detalle__riego-fecha {
   display: block;
-  margin-bottom: var(--espacio-2);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--color-texto);
+  font-variant-numeric: tabular-nums;
 }
 
 .detalle__riego-detalle {
   margin: 0;
   font-size: 14px;
   color: var(--color-texto-secundario);
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .detalle__riego-detalle {
+    grid-column: 2;
+  }
 }
 
 .detalle__no-encontrada {

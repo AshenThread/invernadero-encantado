@@ -1,54 +1,44 @@
 import "./Mensaje.css";
 
+function Pictograma({ children, variante }) {
+  return (
+    <span
+      className={`mensaje__pictograma mensaje__pictograma--${variante}`}
+      aria-hidden="true"
+    >
+      {children}
+    </span>
+  );
+}
+
 function IconoVisto() {
   return (
-    <svg
-      className="mensaje__icono"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        d="M4 10.5 8 14.5 16 5.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <Pictograma variante="exito">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M3 8.5 6.5 12 13 4"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+        />
+      </svg>
+    </Pictograma>
   );
 }
 
 function IconoError() {
   return (
-    <svg
-      className="mensaje__icono"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <circle
-        cx="10"
-        cy="10"
-        r="8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-      />
-      <path
-        d="M10 6v5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <circle cx="10" cy="14" r="1" fill="currentColor" />
-    </svg>
+    <Pictograma variante="error">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M4 4l8 8M12 4l-8 8"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="square"
+        />
+      </svg>
+    </Pictograma>
   );
 }
 

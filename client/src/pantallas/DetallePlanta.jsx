@@ -3,6 +3,7 @@ import { crearRiego, listarRiegos } from "../api/riegos.js";
 import Boton from "../componentes/Boton.jsx";
 import Campo from "../componentes/Campo.jsx";
 import Mensaje from "../componentes/Mensaje.jsx";
+import { formatearFechaCorta } from "../util/fechas.js";
 import "./DetallePlanta.css";
 
 const CAMPOS_FORMULARIO = ["cantidadMl", "fecha", "cuidador"];
@@ -12,32 +13,6 @@ const FORMULARIO_VACIO = {
   fecha: "",
   cuidador: "",
 };
-
-const MESES_CORTO = [
-  "ene",
-  "feb",
-  "mar",
-  "abr",
-  "may",
-  "jun",
-  "jul",
-  "ago",
-  "sep",
-  "oct",
-  "nov",
-  "dic",
-];
-
-function formatearFechaCorta(iso) {
-  const fecha = new Date(iso);
-  if (Number.isNaN(fecha.getTime())) {
-    return "Fecha desconocida";
-  }
-  const dia = fecha.getDate();
-  const mes = MESES_CORTO[fecha.getMonth()];
-  const anio = fecha.getFullYear();
-  return `${dia} ${mes} ${anio}`;
-}
 
 function mensajeCuidado(mensaje) {
   if (!mensaje || typeof mensaje !== "string") {
@@ -54,7 +29,7 @@ function mensajeCuidado(mensaje) {
   return mensaje;
 }
 
-function DetallePlanta({ planta, onVolver }) {
+function DetallePlanta({ planta, onVolver, focoRiego = false }) {
   const [riegos, setRiegos] = useState([]);
   const [estadoHistorial, setEstadoHistorial] = useState("cargando");
   const [errorHistorial, setErrorHistorial] = useState("");
@@ -66,6 +41,7 @@ function DetallePlanta({ planta, onVolver }) {
   const [erroresCampo, setErroresCampo] = useState({});
 
   const formularioRef = useRef(null);
+  const tituloRef = useRef(null);
 
   async function cargarHistorial() {
     setEstadoHistorial("cargando");
@@ -104,6 +80,19 @@ function DetallePlanta({ planta, onVolver }) {
     cargarHistorial();
   }, [planta._id]);
 
+  useEffect(() => {
+    if (focoRiego) {
+      formularioRef.current?.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
+      const input = formularioRef.current?.querySelector("input");
+      input?.focus();
+      return;
+    }
+    tituloRef.current?.focus();
+  }, [focoRiego, planta._id]);
+
   function actualizarCampo(campo) {
     return (evento) => {
       setFormulario((previo) => ({ ...previo, [campo]: evento.target.value }));
@@ -112,7 +101,7 @@ function DetallePlanta({ planta, onVolver }) {
 
   function irAlFormulario() {
     formularioRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: "auto",
       block: "start",
     });
     const input = formularioRef.current?.querySelector("input");
@@ -188,145 +177,168 @@ function DetallePlanta({ planta, onVolver }) {
 
   if (estadoHistorial === "no-encontrada") {
     return (
-      <main className="detalle">
-        <div className="detalle__volver">
-          <Boton tipo="secundario" onClick={onVolver}>
-            Volver a plantas
-          </Boton>
-        </div>
-        <Mensaje
-          variante="error"
-          accion={
-            <button
-              type="button"
-              className="detalle__enlace-volver"
-              onClick={onVolver}
-            >
-              Volver a la lista
-            </button>
-          }
-        >
-          <p className="detalle__no-encontrada">
-            No encontramos esa planta. Puede que se haya borrado.
-          </p>
-        </Mensaje>
-      </main>
-    );
-  }
-
-  return (
-    <main className="detalle">
-      <div className="detalle__volver">
-        <Boton tipo="secundario" onClick={onVolver}>
-          Volver a plantas
-        </Boton>
-      </div>
-
-      <h1>{planta.nombre}</h1>
-      <div className="detalle__apoyo">
-        <p>Especie: {planta.especie}</p>
-        <p>Ubicación: {planta.ubicacion}</p>
-        <p>Riego cada {planta.intervaloRiegoDias} días</p>
-      </div>
-
-      <section
-        className="detalle__seccion"
-        aria-labelledby="titulo-riego"
-        ref={formularioRef}
-      >
-        <h2 id="titulo-riego">Registrar riego</h2>
-        <form className="detalle__formulario" onSubmit={alEnviar} noValidate>
-          {exito ? <Mensaje variante="exito">{exito}</Mensaje> : null}
-          {errorAlta ? <Mensaje variante="error">{errorAlta}</Mensaje> : null}
-
-          <Campo
-            id="riego-cantidad"
-            etiqueta="Cantidad (ml)"
-            tipo="number"
-            min="1"
-            step="1"
-            valor={formulario.cantidadMl}
-            onChange={actualizarCampo("cantidadMl")}
-            error={erroresCampo.cantidadMl}
-          />
-          <Campo
-            id="riego-fecha"
-            etiqueta="Fecha"
-            tipo="date"
-            valor={formulario.fecha}
-            onChange={actualizarCampo("fecha")}
-            ayuda="Si la dejas vacía, se registra con la fecha de hoy."
-            error={erroresCampo.fecha}
-          />
-          <Campo
-            id="riego-cuidador"
-            etiqueta="Cuidador"
-            valor={formulario.cuidador}
-            onChange={actualizarCampo("cuidador")}
-            error={erroresCampo.cuidador}
-            autoComplete="name"
-          />
-
-          <Boton type="submit" tipo="primario" deshabilitado={enviando}>
-            Registrar riego
-          </Boton>
-        </form>
-      </section>
-
-      <section className="detalle__seccion" aria-labelledby="titulo-historial">
-        <h2 id="titulo-historial">Historial de riegos</h2>
-
-        {estadoHistorial === "cargando" ? (
-          <Mensaje variante="carga">Cargando riegos…</Mensaje>
-        ) : null}
-
-        {estadoHistorial === "error" ? (
+      <div className="app-shell detalle">
+        <header className="app-banda">
+          <p className="app-marca">Invernadero Encantado</p>
+          <h1>Planta no encontrada</h1>
+        </header>
+        <main className="app-cuerpo">
+          <div className="detalle__volver">
+            <Boton tipo="secundario" onClick={onVolver}>
+              Volver a plantas
+            </Boton>
+          </div>
           <Mensaje
             variante="error"
             accion={
               <button
                 type="button"
-                className="detalle__reintentar"
-                onClick={cargarHistorial}
+                className="detalle__enlace-volver"
+                onClick={onVolver}
               >
-                Reintentar
+                Volver a la lista
               </button>
             }
           >
-            {errorHistorial}
+            <p className="detalle__no-encontrada">
+              No encontramos esa planta. Puede que se haya borrado.
+            </p>
           </Mensaje>
-        ) : null}
+        </main>
+      </div>
+    );
+  }
 
-        {estadoHistorial === "vacio" ? (
-          <div className="detalle__vacio">
-            <p>Todavía no hay riegos para esta planta.</p>
-            <button
-              type="button"
-              className="detalle__vacio-accion"
-              onClick={irAlFormulario}
+  return (
+    <div className="app-shell detalle">
+      <header className="app-banda">
+        <p className="app-marca">Invernadero Encantado</p>
+        <h1 ref={tituloRef} tabIndex={-1}>
+          {planta.nombre}
+        </h1>
+      </header>
+
+      <main className="app-cuerpo">
+        <div className="detalle__volver">
+          <Boton tipo="secundario" onClick={onVolver}>
+            Volver a plantas
+          </Boton>
+        </div>
+
+        <div className="detalle__apoyo">
+          <p>Especie: {planta.especie}</p>
+          <p>Ubicación: {planta.ubicacion}</p>
+          <p>
+            Riego cada{" "}
+            <span className="intervalo-monumento">
+              {planta.intervaloRiegoDias}
+              <span className="intervalo-monumento__unidad">días</span>
+            </span>
+          </p>
+        </div>
+
+        <section
+          className="detalle__seccion"
+          aria-labelledby="titulo-historial"
+        >
+          <h2 id="titulo-historial">Historial de riegos</h2>
+
+          {estadoHistorial === "cargando" ? (
+            <Mensaje variante="carga">Cargando riegos…</Mensaje>
+          ) : null}
+
+          {estadoHistorial === "error" ? (
+            <Mensaje
+              variante="error"
+              accion={
+                <button
+                  type="button"
+                  className="detalle__reintentar"
+                  onClick={cargarHistorial}
+                >
+                  Reintentar
+                </button>
+              }
             >
-              Registrar el primer riego
-            </button>
-          </div>
-        ) : null}
+              {errorHistorial}
+            </Mensaje>
+          ) : null}
 
-        {estadoHistorial === "ok" ? (
-          <ul className="detalle__historial">
-            {riegos.map((riego) => (
-              <li key={riego._id} className="detalle__riego">
-                <strong className="detalle__riego-fecha">
-                  {formatearFechaCorta(riego.fecha)}
-                </strong>
-                <p className="detalle__riego-detalle">
-                  {riego.cantidadMl} ml ·{" "}
-                  {riego.cuidador?.trim() ? riego.cuidador : "sin cuidador"}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </section>
-    </main>
+          {estadoHistorial === "vacio" ? (
+            <div className="detalle__vacio">
+              <p>Todavía no hay riegos para esta planta.</p>
+              <button
+                type="button"
+                className="detalle__vacio-accion"
+                onClick={irAlFormulario}
+              >
+                Registrar el primer riego
+              </button>
+            </div>
+          ) : null}
+
+          {estadoHistorial === "ok" ? (
+            <ul className="detalle__historial">
+              {riegos.map((riego) => (
+                <li key={riego._id} className="detalle__riego">
+                  <strong className="detalle__riego-fecha">
+                    {formatearFechaCorta(riego.fecha)}
+                  </strong>
+                  <p className="detalle__riego-detalle">
+                    {riego.cantidadMl} ml ·{" "}
+                    {riego.cuidador?.trim() ? riego.cuidador : "sin cuidador"}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+
+        <section
+          className="detalle__seccion"
+          aria-labelledby="titulo-riego"
+          ref={formularioRef}
+        >
+          <h2 id="titulo-riego">Registrar riego</h2>
+          <form className="detalle__formulario" onSubmit={alEnviar} noValidate>
+            {exito ? <Mensaje variante="exito">{exito}</Mensaje> : null}
+            {errorAlta ? <Mensaje variante="error">{errorAlta}</Mensaje> : null}
+
+            <Campo
+              id="riego-cantidad"
+              etiqueta="Cantidad (ml)"
+              tipo="number"
+              min="1"
+              step="1"
+              valor={formulario.cantidadMl}
+              onChange={actualizarCampo("cantidadMl")}
+              error={erroresCampo.cantidadMl}
+            />
+            <Campo
+              id="riego-fecha"
+              etiqueta="Fecha"
+              tipo="date"
+              valor={formulario.fecha}
+              onChange={actualizarCampo("fecha")}
+              ayuda="Si la dejas vacía, se registra con la fecha de hoy."
+              error={erroresCampo.fecha}
+            />
+            <Campo
+              id="riego-cuidador"
+              etiqueta="Cuidador"
+              valor={formulario.cuidador}
+              onChange={actualizarCampo("cuidador")}
+              error={erroresCampo.cuidador}
+              autoComplete="name"
+            />
+
+            <Boton type="submit" tipo="primario" deshabilitado={enviando}>
+              Registrar riego
+            </Boton>
+          </form>
+        </section>
+      </main>
+    </div>
   );
 }
 

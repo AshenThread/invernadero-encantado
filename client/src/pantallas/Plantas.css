@@ -1,13 +1,5 @@
-.plantas {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: var(--espacio-5);
-}
-
-@media (min-width: 768px) {
-  .plantas {
-    padding: var(--espacio-7);
-  }
+.plantas > .app-cuerpo > .mensaje {
+  margin-bottom: var(--espacio-5);
 }
 
 .plantas__seccion {
@@ -16,7 +8,7 @@
 
 .plantas__formulario {
   background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
+  border: 2px solid var(--color-texto);
   border-radius: var(--radio-tarjeta);
   padding: var(--espacio-5);
 }
@@ -26,7 +18,7 @@
 }
 
 .plantas__vacio {
-  border: 2px dashed var(--color-borde);
+  border: 2px dashed var(--color-texto);
   border-radius: var(--radio-tarjeta);
   padding: var(--espacio-5);
   background: var(--color-superficie);
@@ -42,11 +34,13 @@
   border: none;
   padding: 0;
   min-height: 44px;
-  color: var(--color-acento);
+  color: var(--color-texto);
   font-family: var(--fuente-texto);
   font-size: 16px;
   font-weight: 700;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 
@@ -58,16 +52,18 @@
   width: 100%;
   border-collapse: collapse;
   background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
+  border: 2px solid var(--color-texto);
   border-radius: var(--radio-tarjeta);
 }
 
 .plantas__tabla th {
-  background: var(--color-primario);
+  background: var(--color-texto);
   color: var(--color-superficie);
   font-family: var(--fuente-texto);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-align: left;
   padding: var(--espacio-3) var(--espacio-4);
 }
@@ -76,6 +72,15 @@
   padding: var(--espacio-3) var(--espacio-4);
   border-top: 1px solid var(--color-borde);
   font-size: 16px;
+  vertical-align: middle;
+}
+
+.plantas__tabla tbody tr {
+  transition: background-color 120ms ease-out;
+}
+
+.plantas__tabla tbody tr:hover {
+  background: var(--color-fondo);
 }
 
 .plantas__enlace {
@@ -83,43 +88,15 @@
   border: none;
   padding: 0;
   min-height: 44px;
-  color: var(--color-acento);
+  color: var(--color-texto);
   font-family: var(--fuente-texto);
   font-size: 16px;
   font-weight: 700;
   text-align: left;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
   cursor: pointer;
-}
-
-.plantas__tarjetas {
-  display: none;
-  flex-direction: column;
-  gap: var(--espacio-4);
-}
-
-.plantas__tarjeta {
-  background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-tarjeta);
-  padding: var(--espacio-5);
-}
-
-.plantas__tarjeta-nombre {
-  margin: 0 0 var(--espacio-3);
-  font-family: var(--fuente-titulos);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.plantas__tarjeta-dato {
-  margin: 0 0 var(--espacio-2);
-  color: var(--color-texto-secundario);
-  font-size: 16px;
-}
-
-.plantas__tarjeta-dato:last-child {
-  margin-bottom: 0;
 }
 
 .plantas__reintentar {
@@ -127,20 +104,105 @@
   border: none;
   padding: 0;
   min-height: 44px;
-  color: var(--color-acento);
+  color: var(--color-texto);
   font-family: var(--fuente-texto);
   font-size: 16px;
   font-weight: 700;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 
+.plantas__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plantas__tabla tbody tr {
+    transition: none;
+  }
+}
+
 @media (max-width: 767px) {
-  .plantas__tabla-envoltorio {
-    display: none;
+  .plantas__tabla,
+  .plantas__tabla tbody,
+  .plantas__tabla tr,
+  .plantas__tabla td {
+    display: block;
+    width: 100%;
   }
 
-  .plantas__tarjetas {
-    display: flex;
+  .plantas__tabla thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .plantas__tabla {
+    border: none;
+    background: transparent;
+  }
+
+  .plantas__tabla tr {
+    background: var(--color-superficie);
+    border: 2px solid var(--color-texto);
+    border-radius: var(--radio-tarjeta);
+    padding: var(--espacio-5);
+    margin-bottom: var(--espacio-4);
+  }
+
+  .plantas__tabla tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .plantas__tabla td {
+    border: none;
+    padding: 0 0 var(--espacio-2);
+  }
+
+  .plantas__tabla td:last-child {
+    padding-bottom: 0;
+  }
+
+  .plantas__tabla td[data-label="Nombre"] {
+    margin-bottom: var(--espacio-3);
+  }
+
+  .plantas__tabla td[data-label="Nombre"] .plantas__enlace {
+    font-family: var(--fuente-titulos);
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .plantas__tabla td[data-label="Nombre"] .plantas__enlace:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  .plantas__tabla
+    td:not([data-label="Nombre"]):not([data-label="Acciones"])::before {
+    content: attr(data-label) ": ";
+    color: var(--color-texto-secundario);
+    font-weight: 400;
+  }
+
+  .plantas__tabla td[data-label="Acciones"] {
+    margin-top: var(--espacio-3);
   }
 }

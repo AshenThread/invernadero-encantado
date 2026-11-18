@@ -1,21 +1,27 @@
 :root {
-  --color-primario: #2f6b4f;
-  --color-acento: #6a4c9c;
-  --color-texto: #1e2b22;
-  --color-texto-secundario: #4e5e53;
-  --color-fondo: #f3f6f1;
+  --color-primario: #0b0b0b;
+  --color-acento: #ffcc00;
+  --color-texto: #0b0b0b;
+  --color-texto-secundario: #3a3a3a;
+  --color-fondo: #e6e6e6;
   --color-superficie: #ffffff;
-  --color-borde: #c9d6ca;
-  --color-borde-campo: #7a8a7f;
-  --color-exito-fondo: #e3f0e7;
+  --color-borde: #bdbdbd;
+  --color-borde-campo: #6e6e6e;
+  --color-exito-fondo: #ececec;
   --color-error: #b3261e;
   --color-error-fondo: #fbecea;
   --color-aviso: #8a5300;
   --color-aviso-fondo: #fbf1df;
+  --color-shell: #ffcc00;
+  --color-panel: #1a1a1a;
+  --color-sobre-shell: #0b0b0b;
+  --color-sobre-primario: #ffcc00;
 
-  --fuente-titulos: "Bricolage Grotesque", system-ui, sans-serif;
-  --fuente-texto: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --fuente-titulos: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+  --fuente-texto: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+  --fuente-datos: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
 
+  --espacio-0: 2px;
   --espacio-1: 4px;
   --espacio-2: 8px;
   --espacio-3: 12px;
@@ -24,6 +30,9 @@
   --espacio-6: 32px;
   --espacio-7: 48px;
 
-  --radio-control: 8px;
-  --radio-tarjeta: 12px;
+  --radio-control: 4px;
+  --radio-tarjeta: 6px;
+
+  --duracion-flap: 180ms;
+  --easing-flap: steps(2, end);
 }

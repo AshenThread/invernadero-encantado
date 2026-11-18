@@ -2,29 +2,92 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--espacio-3);
   min-height: 44px;
-  padding: var(--espacio-3) var(--espacio-5);
+  padding: var(--espacio-2) var(--espacio-4) var(--espacio-2) var(--espacio-2);
   border-radius: var(--radio-control);
   font-family: var(--fuente-texto);
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  transition:
+    background-color 120ms ease-out,
+    color 120ms ease-out,
+    border-color 120ms ease-out,
+    transform 120ms ease-out;
+}
+
+.boton__pictograma {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--color-texto);
+  color: var(--color-acento);
+}
+
+.boton__texto {
+  padding-right: var(--espacio-2);
 }
 
 .boton:disabled {
-  opacity: 0.6;
+  opacity: 0.45;
   cursor: not-allowed;
+  transform: none;
 }
 
 .boton--primario {
-  border: none;
-  background: var(--color-primario);
-  color: var(--color-superficie);
+  border: 2px solid var(--color-texto);
+  background: var(--color-acento);
+  color: var(--color-texto);
+}
+
+.boton--primario:hover:not(:disabled) {
+  background: var(--color-texto);
+  color: var(--color-acento);
+}
+
+.boton--primario:hover:not(:disabled) .boton__pictograma {
+  background: var(--color-acento);
+  color: var(--color-texto);
+}
+
+.boton--primario:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .boton--secundario {
-  border: 2px solid var(--color-primario);
+  border: 2px solid var(--color-texto);
+  background: transparent;
+  color: var(--color-texto);
+  padding-left: var(--espacio-2);
+}
+
+.boton--secundario .boton__pictograma {
+  background: var(--color-texto);
+  color: var(--color-superficie);
+}
+
+.boton--secundario:hover:not(:disabled) {
+  background: var(--color-texto);
+  color: var(--color-superficie);
+}
+
+.boton--secundario:hover:not(:disabled) .boton__pictograma {
   background: var(--color-superficie);
-  color: var(--color-primario);
+  color: var(--color-texto);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boton {
+    transition: none;
+  }
+
+  .boton--primario:active:not(:disabled) {
+    transform: none;
+  }
 }
