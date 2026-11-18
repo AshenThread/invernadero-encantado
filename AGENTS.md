@@ -39,6 +39,7 @@ API REST para registrar las plantas mágicas de un invernadero y sus riegos.
 - Antes de crear o modificar cualquier archivo de `client/`, lee `DESIGN.md`.
 - CSS plano sin librerías; colores, espacios y fuentes solo desde las variables de `client/src/styles/tokens.css`.
 - Textos en español con el tono de `DESIGN.md`.
+- Si la spec tiene wireframes (sección «Pantallas»), son la referencia de estructura: qué hay en cada pantalla, en qué orden y con qué textos. Colores, tipografía y componentes salen de DESIGN.md; el comportamiento, de los criterios de la spec.
 - Arranque: `cd client && npm run dev`.
 
 ## Flujo de trabajo
